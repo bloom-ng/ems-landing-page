@@ -47,7 +47,7 @@ export function MarketingFooter() {
 						<div className="mb-8 flex items-center gap-3">
 							<div className="h-8 w-6 rounded-inner bg-green shadow-sm" />
 							<span className="text-2xl font-black tracking-tighter text-black">
-								JEDAQ
+								OGAFLOW
 							</span>
 						</div>
 						<p className="max-w-sm text-base text-neutral-400 font-medium">
@@ -84,7 +84,7 @@ export function MarketingFooter() {
 							©
 						</div>
 						<p className="text-sm text-neutral-400">
-							2026. Jedaq. All rights reserved
+							2026. Ogaflow. All rights reserved
 						</p>
 					</div>
 				</div>

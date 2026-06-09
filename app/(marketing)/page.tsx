@@ -24,7 +24,7 @@ export default function MarketingPage() {
 					</h1>
 
 					<p className="w-full max-w-[620px] text-[14px]/[22px] sm:text-[20px]/[28px] font-normal text-black text-center mb-8 lg:mb-0 font-nunito">
-						Jedaq brings payroll, attendance, leaves, scheduling, and performance into a single clean workspace, for teams of any size.
+						Ogaflow brings payroll, attendance, leaves, scheduling, and performance into a single clean workspace, for teams of any size.
 					</p>
 
 					<div className="flex justify-center w-full py-4">
@@ -63,13 +63,13 @@ export default function MarketingPage() {
 							Built For Real Teams
 						</h2>
 						<p className="max-w-2xl text-[20px] font-normal text-black leading-[28px] tracking-[0.02em] font-nunito">
-							Whether you are a 10 person startup or a 5,000 person enterprise, Jedaq scales to fit your needs.
+							Whether you are a 10 person startup or a 5,000 person enterprise, Ogaflow scales to fit your needs.
 						</p>
 					</div>
 
 					<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
 						{[
-							{ title: "Small Businesses (1–50)", icon: "groups_3" },
+							{ title: "Small Businesses (1–50)", icon: "groups" },
 							{ title: "Mid-size (50–500)", icon: "corporate_fare" },
 							{ title: "Enterprise (500+)", icon: "domain" },
 							{ title: "Multi-location", icon: "public" },
@@ -116,7 +116,7 @@ export default function MarketingPage() {
 							A Modern Platform For The Full Employee Lifecycle
 						</h2>
 						<p className="mx-auto max-w-3xl text-[20px] font-normal text-black leading-[28px] tracking-[0.02em] font-nunito">
-							From first hire to final payslip. Jedaq handles every step so your HR team can focus on people, not paperwork.
+							From first hire to final payslip. Ogaflow handles every step so your HR team can focus on people, not paperwork.
 						</p>
 					</div>
 
@@ -186,7 +186,7 @@ export default function MarketingPage() {
 							Ready To Automate Your Workflow?
 						</h2>
 						<p className="relative mx-auto mb-14 max-w-2xl text-[18px] font-normal text-black leading-[28px] tracking-[0.02em] text-center font-nunito">
-							Join thousands of companies using Jedaq to save time, reduce errors, and build better workplaces.
+							Join thousands of companies using Ogaflow to save time, reduce errors, and build better workplaces.
 						</p>
 						<div className="relative flex flex-col items-center justify-center gap-4 sm:gap-[28px] sm:flex-row">
 							<Button variant="primary" size="lg" className="!bg-green !border-green/20 hover:!bg-green/90 px-10 py-5 text-[20px]/[24px] font-bold tracking-[0.02em] font-nunito shadow-2xl shadow-green/20">

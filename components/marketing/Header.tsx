@@ -23,7 +23,7 @@ export function MarketingHeader() {
 					<Link href="/" className="flex items-center gap-3 group">
 						<div className="h-8 w-6 rounded-inner bg-green transition-transform group-hover:scale-110 shadow-sm" />
 						<span className="text-xl font-black tracking-tighter text-black">
-							JEDAQ
+							OGAFLOW
 						</span>
 					</Link>
 
@@ -44,12 +44,7 @@ export function MarketingHeader() {
 
 				<div className="flex items-center gap-4 sm:gap-[28px]">
 					<div className="hidden sm:flex items-center gap-4 sm:gap-[28px]">
-						<Link
-							href="/login"
-							className="text-base sm:text-[16px]/[24px] font-normal text-green transition-colors hover:text-green/80"
-						>
-							Login
-						</Link>
+
 						<Button
 							variant="primary"
 							size="md"
@@ -87,13 +82,7 @@ export function MarketingHeader() {
 						))}
 						<hr className="border-border" />
 						<div className="flex flex-col gap-4">
-							<Link
-								href="/login"
-								className="flex h-12 items-center justify-center rounded-lg border border-border font-bold text-black"
-								onClick={() => setIsMenuOpen(false)}
-							>
-								Login
-							</Link>
+
 							<Button
 								variant="primary"
 								size="lg"

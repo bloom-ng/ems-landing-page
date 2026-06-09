@@ -14,12 +14,12 @@ export default function ContactPage() {
 		},
 		{
 			label: "Mail",
-			value: "hello@jedaq.com",
+			value: "hello@ogaflow.com",
 			icon: "mail",
 		},
 		{
 			label: "Phone",
-			value: "+234 800 JEDAQ",
+			value: "+234 800 OGAFLOW",
 			icon: "call",
 		},
 		{

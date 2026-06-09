@@ -31,11 +31,11 @@ export default function PlansPage() {
 		const displayPrice =
 			plan.priceMonthly <= 0 && plan.seatPrice <= 0
 				? 0
-				: calcPlanTotal(plan, Math.max(seatCount, plan.includedSeats || 5));
+				: (billingCycle === "annual" ? plan.priceYearly : plan.priceMonthly);
 
 		return {
 			id: plan.id,
-			name: plan.tier,
+			name: plan.name || plan.tier,
 			price: isEnterprise && plan.priceMonthly >= 20000 ? "Custom" : displayPrice,
 			description: plan.description ?? "",
 			seatPrice: plan.seatPrice,
@@ -50,73 +50,7 @@ export default function PlansPage() {
 		};
 	});
 
-	const plans = plansFromApi.length > 0 ? plansFromApi : [
-		{
-			name: "FREE",
-			price: 0,
-			description: "Custom solutions for large organizations with complex needs.",
-			cta: "Get Started",
-			variant: "outline" as const,
-			features: [
-				"Up to 5 seats",
-				"Time & attendance",
-				"Basic reporting",
-				"Dedicated account manager",
-			],
-		},
-		{
-			name: "STARTER",
-			price: billingCycle === "monthly" ? 2500 : 25000,
-			seatPrice: billingCycle === "monthly" ? 100 : 100,
-			baseSeats: 5,
-			description: "For small teams getting started with HR.",
-			cta: "Get Started",
-			variant: "primary" as const,
-			highlight: true,
-			features: [
-				"Up to 50 seats",
-				"Time & attendance",
-				"Leave management",
-				"Basic reporting",
-				"Email support",
-			],
-		},
-		{
-			name: "PROFESSIONAL",
-			price: billingCycle === "monthly" ? 7500 : 75000,
-			seatPrice: billingCycle === "monthly" ? 150 : 150,
-			baseSeats: 10,
-			description: "Everything growing teams need to manage people effectively.",
-			cta: "Get Started",
-			variant: "outline" as const,
-			features: [
-				"Up to 100 seats",
-				"Everything in Starter",
-				"Payroll automation",
-				"Performance reviews",
-				"Analytics & insights",
-				"Onboarding workflows",
-				"Priority support",
-			],
-		},
-		{
-			name: "ENTERPRISE",
-			price: "Custom",
-			description: "Custom solutions for large organizations with complex needs.",
-			cta: "Contact Us",
-			variant: "outline" as const,
-			features: [
-				"Unlimited seats",
-				"Everything in Professional",
-				"Custom integrations",
-				"Dedicated account manager",
-				"SLA guarantee",
-				"SSO & security",
-				"Custom reporting",
-				"24/7 phone support",
-			],
-		},
-	];
+	const plans = plansFromApi;
 
 	const faqs = [
 		{
@@ -137,15 +71,8 @@ export default function PlansPage() {
 		},
 	];
 
-	// Seat pricing logic based on starter plan in image
-	const getCalculatedStarterPrice = (seats: number) => {
-		const starter = apiPlans.find((p) => p.tier === "STARTER");
-		if (starter) return calcPlanTotal(starter, seats);
-		const basePrice = billingCycle === "monthly" ? 2500 : 25000;
-		const perSeat = 100;
-		const included = 5;
-		return basePrice + Math.max(0, seats - included) * perSeat;
-	};
+	const starterPlan = apiPlans.find((p) => p.tier === "STARTER");
+	const starterPrice = starterPlan ? calcPlanTotal(starterPlan, seatCount) : 0;
 
 	return (
 		<main className="flex flex-col bg-white overflow-x-hidden">
@@ -164,17 +91,15 @@ export default function PlansPage() {
 						<div className="flex items-center p-1 bg-green/5 rounded-full border border-green/10">
 							<button
 								onClick={() => setBillingCycle("monthly")}
-								className={`px-4 md:px-8 py-2 md:py-3 rounded-full text-xs md:text-sm font-bold transition-all ${
-									billingCycle === "monthly" ? "bg-green text-white shadow-lg shadow-green/20" : "text-green hover:bg-green/5"
-								}`}
+								className={`px-4 md:px-8 py-2 md:py-3 rounded-full text-xs md:text-sm font-bold transition-all ${billingCycle === "monthly" ? "bg-green text-white shadow-lg shadow-green/20" : "text-green hover:bg-green/5"
+									}`}
 							>
 								Monthly
 							</button>
 							<button
 								onClick={() => setBillingCycle("annual")}
-								className={`px-4 md:px-8 py-2 md:py-3 rounded-full text-xs md:text-sm font-bold transition-all ${
-									billingCycle === "annual" ? "bg-green text-white shadow-lg shadow-green/20" : "text-green hover:bg-green/5"
-								}`}
+								className={`px-4 md:px-8 py-2 md:py-3 rounded-full text-xs md:text-sm font-bold transition-all ${billingCycle === "annual" ? "bg-green text-white shadow-lg shadow-green/20" : "text-green hover:bg-green/5"
+									}`}
 							>
 								Annual (20% off)
 							</button>
@@ -191,9 +116,8 @@ export default function PlansPage() {
 						{plans.map((plan) => (
 							<div
 								key={plan.name}
-								className={`flex flex-col p-6 md:p-8 rounded-[24px] border transition-all hover:shadow-2xl hover:shadow-green/5 ${
-									plan.highlight ? "border-green bg-green/5 ring-1 ring-green/50 shadow-xl shadow-green/5" : "border-border bg-white"
-								}`}
+								className={`flex flex-col p-6 md:p-8 rounded-[24px] border transition-all hover:shadow-2xl hover:shadow-green/5 ${plan.highlight ? "border-green bg-green/5 ring-1 ring-green/50 shadow-xl shadow-green/5" : "border-border bg-white"
+									}`}
 							>
 								<div className="text-left mb-8">
 									<span className="text-[10px] font-black tracking-[0.2em] text-muted-foreground uppercase block mb-4">
@@ -233,16 +157,15 @@ export default function PlansPage() {
 												: `/signup/tenant${"id" in plan && plan.id ? `?planId=${plan.id}` : ""}`
 										}
 									>
-									<Button
-										variant={plan.variant}
-										className={`w-full py-4 rounded-xl text-[18px] font-bold capitalize tracking-[0.02em] font-nunito h-14 ${
-											plan.variant === "primary" 
-												? "!bg-green !text-white !border-green/20 hover:!bg-green/90 shadow-lg shadow-green/20" 
+										<Button
+											variant={plan.variant}
+											className={`w-full py-4 rounded-xl text-[18px] font-bold capitalize tracking-[0.02em] font-nunito h-14 ${plan.variant === "primary"
+												? "!bg-green !text-white !border-green/20 hover:!bg-green/90 shadow-lg shadow-green/20"
 												: "!bg-green/10 !text-green !border-green/10 hover:!bg-green/20"
-										}`}
-									>
-										{plan.cta}
-									</Button>
+												}`}
+										>
+											{plan.cta}
+										</Button>
 									</Link>
 								</div>
 
@@ -280,14 +203,14 @@ export default function PlansPage() {
 								<div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
 									<span className="text-sm font-black uppercase tracking-widest text-muted-foreground">Number of Seats</span>
 									<div className="flex items-center gap-4 bg-green/5 p-2 rounded-xl border border-green/10">
-										<button 
+										<button
 											onClick={() => setSeatCount(Math.max(1, seatCount - 1))}
 											className="w-8 h-8 flex items-center justify-center rounded-lg bg-white border border-border text-green hover:bg-green hover:text-white transition-all shadow-sm"
 										>
 											<span className="material-icons-outlined text-sm">remove</span>
 										</button>
 										<span className="text-xl font-black text-green w-12 text-center font-nunito">{seatCount}</span>
-										<button 
+										<button
 											onClick={() => setSeatCount(seatCount + 1)}
 											className="w-8 h-8 flex items-center justify-center rounded-lg bg-white border border-border text-green hover:bg-green hover:text-white transition-all shadow-sm"
 										>
@@ -295,12 +218,12 @@ export default function PlansPage() {
 										</button>
 									</div>
 								</div>
-								
+
 								<div className="relative pt-6 pb-2">
-									<input 
-										type="range" 
-										min="1" 
-										max="500" 
+									<input
+										type="range"
+										min="1"
+										max="500"
 										value={seatCount}
 										onChange={(e) => setSeatCount(parseInt(e.target.value))}
 										className="w-full h-2 bg-green/10 rounded-full appearance-none cursor-pointer accent-green"
@@ -318,25 +241,25 @@ export default function PlansPage() {
 							<div className="bg-muted/5 w-full max-w-md p-8 md:p-10 rounded-[32px] border-2 border-green shadow-2xl shadow-green/10 transform hover:scale-[1.01] transition-transform">
 								<div className="text-left mb-8">
 									<span className="text-green text-[16px] font-bold font-nunito tracking-[0.2em] uppercase inline-block mb-6">
-										STARTER
+										{starterPlan?.name || "STARTER"}
 									</span>
 									<div className="flex items-baseline gap-1">
 										<span className="text-5xl md:text-6xl font-black text-black font-nunito tracking-tighter">
-											{formatNaira(getCalculatedStarterPrice(seatCount))}
+											{formatNaira(starterPrice)}
 										</span>
-										<span className="text-lg font-bold text-muted-foreground">/mo</span>
+										<span className="text-lg font-bold text-muted-foreground">/{billingCycle === "monthly" ? "mo" : "yr"}</span>
 									</div>
 									<p className="mt-2 text-sm font-bold text-muted-foreground">
-										{formatNaira(100)}/seat beyond included — {seatCount} seats
+										{formatNaira(starterPlan?.seatPrice || 0)}/seat beyond included — {seatCount} seats
 									</p>
 									<p className="mt-4 text-[15px] font-medium text-black/60 leading-relaxed font-nunito">
-										For small teams getting started with HR.
+										{starterPlan?.description || "For small teams getting started with HR."}
 									</p>
 								</div>
 
-								<Button 
-									variant="primary" 
-									size="lg" 
+								<Button
+									variant="primary"
+									size="lg"
 									className="w-full py-6 rounded-2xl text-[20px]/[24px] font-bold uppercase tracking-[0.02em] font-nunito !bg-green !text-white !border-green/20 hover:!bg-green/90 shadow-xl shadow-green/20 mb-8 h-16"
 								>
 									Get Started
