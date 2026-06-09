@@ -13,8 +13,15 @@ export default function PlansPage() {
 	const [plansLoading, setPlansLoading] = useState(true);
 
 	useEffect(() => {
-		getPublicPlans()
-			.then(setApiPlans)
+		fetch("/api/proxy/plans")
+			.then((res) => res.json())
+			.then((payload) => {
+				if (payload && typeof payload === "object" && "success" in payload && "data" in payload) {
+					setApiPlans(payload.data);
+				} else {
+					setApiPlans(payload);
+				}
+			})
 			.catch(() => setApiPlans([]))
 			.finally(() => setPlansLoading(false));
 	}, []);
