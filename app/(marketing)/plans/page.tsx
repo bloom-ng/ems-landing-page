@@ -137,9 +137,7 @@ export default function PlansPage() {
 										<div className="mt-1">
 											<p className="text-[10px] font-bold text-muted-foreground">
 												{formatNaira(plan.seatPrice)}/seat —{" "}
-												{"includedSeats" in plan
-													? plan.includedSeats
-													: plan.baseSeats}{" "}
+												{plan.includedSeats ?? 0}{" "}
 												seats included
 											</p>
 										</div>
