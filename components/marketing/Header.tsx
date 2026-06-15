@@ -33,7 +33,7 @@ export function MarketingHeader() {
 								key={link.label}
 								href={link.href}
 								className={`text-[16px]/[24px] font-normal transition-colors hover:text-green ${
-									pathname === link.href ? "text-green" : "text-black"
+									pathname === link.href ? "text-green" : "text-[#878A90]"
 								}`}
 							>
 								{link.label}
@@ -73,7 +73,7 @@ export function MarketingHeader() {
 								key={link.label}
 								href={link.href}
 								className={`text-lg font-bold ${
-									pathname === link.href ? "text-green" : "text-black"
+									pathname === link.href ? "text-green" : "text-[#878A90]"
 								}`}
 								onClick={() => setIsMenuOpen(false)}
 							>

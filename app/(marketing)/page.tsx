@@ -14,17 +14,17 @@ export default function MarketingPage() {
 						<div className="flex items-center gap-[10px] w-[199px] h-[40px] p-[8px] rounded-[40px] border-[0.5px] border-green/20 bg-green/10 transition-all hover:bg-green/20 cursor-default justify-center">
 							<div className="h-2 w-2 rounded-full bg-green animate-pulse" />
 							<span className="text-[11px] font-black text-green tracking-widest uppercase">
-								Free 7 Days Trial
+								Welcome to Ogaflow
 							</span>
 						</div>
 					</div>
 
 					<h1 className="w-full max-w-[763px] text-[30px]/[38px] md:text-[45px]/[53px] lg:text-[50px]/[58px] font-bold text-black text-center mb-6 lg:mb-0 font-nunito">
-						Manage Your Entire Workforce In One Place
+						One system, every team, all in one place.
 					</h1>
 
 					<p className="w-full max-w-[620px] text-[14px]/[22px] sm:text-[20px]/[28px] font-normal text-black text-center mb-8 lg:mb-0 font-nunito">
-						Ogaflow brings payroll, attendance, leaves, scheduling, and performance into a single clean workspace, for teams of any size.
+						From hiring, to payroll, attendance to performance, one system handles it all.
 					</p>
 
 					<div className="flex justify-center w-full py-4">
@@ -76,9 +76,9 @@ export default function MarketingPage() {
 						].map((item, i) => (
 							<div
 								key={i}
-								className="flex flex-col gap-6 rounded-default border border-border bg-neutral-50/50 p-8 transition-all hover:bg-white hover:shadow-2xl group"
+								className="flex flex-col gap-6 rounded-[16px] border border-[#878A90] bg-[#F8FAFC] p-8 transition-all hover:bg-white hover:border-green/30 hover:shadow-2xl group"
 							>
-								<div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-inner bg-green/10 text-green group-hover:scale-110 transition-transform">
+								<div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[8px] bg-green/10 text-green group-hover:scale-110 transition-transform">
 									<span className="material-icons-outlined !text-2xl">
 										{item.icon}
 									</span>
@@ -113,10 +113,10 @@ export default function MarketingPage() {
 				<div className="mx-auto max-w-7xl px-6">
 					<div className="mb-16 lg:mb-24 text-center">
 						<h2 className="mb-6 text-[32px] md:text-[40px] lg:text-[48px] mx-auto max-w-4xl font-bold leading-tight md:leading-[48px] lg:leading-[56px] tracking-[0.02em] text-center font-nunito text-black">
-							A Modern Platform For The Full Employee Lifecycle
+							Every employee journey simplified
 						</h2>
 						<p className="mx-auto max-w-3xl text-[20px] font-normal text-black leading-[28px] tracking-[0.02em] font-nunito">
-							From first hire to final payslip. Ogaflow handles every step so your HR team can focus on people, not paperwork.
+							Manage employee operations so hiring, leave requests, and payroll are simple, automated, and stress-free.
 						</p>
 					</div>
 
@@ -124,40 +124,40 @@ export default function MarketingPage() {
 						{[
 							{
 								title: "Time & Attendance",
-								desc: "Real-time clock-in/out, GPS geofencing, overtime tracking, and automated timesheets synced to payroll.",
+								desc: "Employees clock in, GPS verifies location, and overtime is tracked automatically before payroll runs.",
 								icon: "schedule",
 							},
 							{
 								title: "Payroll Management",
-								desc: "Automate salary calculations, statutory deductions, multi-currency payments, and payslip distribution.",
+								desc: "Automate payroll, deductions, multi-currency payments, and payslip delivery in one system.",
 								icon: "payments",
 							},
 							{
 								title: "Leave Management",
-								desc: "Approve, track, and forecast leave balances with a visual drag-and-drop calendar and custom policies.",
+								desc: "Manage leave requests with fast approvals and a visual calendar that keeps teams organized.",
 								icon: "event_available",
 							},
 							{
 								title: "Performance Reviews",
-								desc: "OKR tracking, 360° peer reviews, manager notes, and development plans tied together in one flow.",
+								desc: "Track OKRs, feedback, reviews, and employee growth all in one place.",
 								icon: "bar_chart",
 							},
 							{
 								title: "Self-Service Portal",
-								desc: "Employees update profiles, request time off, and view payslips without needing HR involvement.",
+								desc: "Employees can manage profiles, request leave, and access payslips without HR assistance.",
 								icon: "person_search",
 							},
 							{
 								title: "Analytics & Reporting",
-								desc: "Live workforce dashboards and AI-generated insights surfacing trends and risks before they compound.",
+								desc: "Monitor workforce data in real time with dashboards and AI insights that help identify trends and risks early.",
 								icon: "trending_up",
 							},
 						].map((feature, i) => (
 							<div
 								key={i}
-								className="group rounded-default border border-border bg-white p-10 transition-all hover:-translate-y-2 hover:border-green/30 hover:shadow-[0_24px_48px_-12px_rgba(0,0,0,0.08)]"
+								className="group rounded-[16px] border border-[#878A90] bg-white p-6 transition-all hover:-translate-y-2 hover:border-green/30 hover:shadow-[0_24px_48px_-12px_rgba(0,0,0,0.08)]"
 							>
-								<div className="mb-8 flex h-14 w-14 items-center justify-center rounded-inner bg-green/10 text-green group-hover:bg-green group-hover:text-white transition-all duration-300">
+								<div className="mb-8 flex h-14 w-14 items-center justify-center rounded-[8px] bg-green/10 text-green group-hover:bg-green group-hover:text-white transition-all duration-300">
 									<span className="material-icons-outlined !text-3xl">
 										{feature.icon}
 									</span>
@@ -178,21 +178,18 @@ export default function MarketingPage() {
 			{/* Final CTA */}
 			<section className="py-20 bg-white">
 				<div className="mx-auto max-w-4xl px-6">
-					<div className="rounded-[32px] border border-border bg-[#AFB1B5]/5 p-8 sm:p-24 text-center shadow-border relative overflow-hidden group">
-						<div className="absolute top-0 right-0 -mr-20 -mt-20 h-64 w-64 rounded-full bg-green/5 blur-3xl transition-all group-hover:scale-150" />
-						<div className="absolute bottom-0 left-0 -ml-20 -mb-20 h-64 w-64 rounded-full bg-green/5 blur-3xl transition-all group-hover:scale-150" />
-						
+					<div className="rounded-[16px] border border-[#878A90] bg-[#F8FAFC] p-8 sm:p-24 text-center shadow-border relative overflow-hidden group">
 						<h2 className="relative mb-8 text-[32px] md:text-[36px] lg:text-[40px] font-bold leading-tight md:leading-[44px] lg:leading-[56px] tracking-[0.02em] text-center font-nunito text-black">
-							Ready To Automate Your Workflow?
+							Your team runs better from here
 						</h2>
 						<p className="relative mx-auto mb-14 max-w-2xl text-[18px] font-normal text-black leading-[28px] tracking-[0.02em] text-center font-nunito">
-							Join thousands of companies using Ogaflow to save time, reduce errors, and build better workplaces.
+							Less stress, more time, stronger teams. Join thousands of companies already excelling with EMS.
 						</p>
 						<div className="relative flex flex-col items-center justify-center gap-4 sm:gap-[28px] sm:flex-row">
-							<Button variant="primary" size="lg" className="!bg-green !border-green/20 hover:!bg-green/90 px-10 py-5 text-[20px]/[24px] font-bold tracking-[0.02em] font-nunito shadow-2xl shadow-green/20">
+							<Button variant="primary" size="lg" className="px-10 py-5 text-[20px]/[24px] font-bold tracking-[0.02em] font-nunito shadow-2xl">
 								Get Started For Free
 							</Button>
-							<Button variant="outline" size="lg" className="!text-green !border-green/20 hover:!bg-green/5 px-10 py-5 text-[20px]/[24px] font-bold tracking-[0.02em] font-nunito">
+							<Button variant="outline" size="lg" className="px-10 py-5 text-[20px]/[24px] font-bold tracking-[0.02em] font-nunito">
 								View Pricing
 							</Button>
 						</div>
