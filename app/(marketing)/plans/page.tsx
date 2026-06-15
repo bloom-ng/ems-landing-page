@@ -61,20 +61,20 @@ export default function PlansPage() {
 
 	const faqs = [
 		{
-			question: "What counts as a seat?",
-			answer: "A seat is one active employee account. Deactivated accounts do not count toward your total.",
+			question: "How do companies get started with the EMS?",
+			answer: "Companies can subscribe to a plan, set up their organization profile, and begin adding employees, departments, and operational records to the system.",
 		},
 		{
-			question: "Can I change plans anytime?",
-			answer: "Yes, upgrade or downgrade at any time. Changes are prorated to your billing cycle.",
+			question: "Is the EMS subscription-based?",
+			answer: "Yes. The EMS operates on a subscription model.",
 		},
 		{
-			question: "Is there a setup fee?",
-			answer: "No setup fees, ever. You only pay the per-seat monthly or annual fee.",
+			question: "How does pricing work?",
+			answer: "Pricing depends on the subscription plan selected. Different plans provide access to different plugins and platform features.",
 		},
 		{
-			question: "What payment methods do you accept?",
-			answer: "All major credit cards, bank transfers, and invoice billing for Enterprise.",
+			question: "Can I upgrade the subscription plan later?",
+			answer: "Yes. Companies can upgrade their subscription plans to access additional plugins and features as their needs grow.",
 		},
 	];
 

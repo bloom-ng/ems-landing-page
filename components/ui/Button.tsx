@@ -20,9 +20,9 @@ export const Button: React.FC<ButtonProps> = ({
   const baseStyles = 'inline-flex items-center justify-center font-bold transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed rounded-default border-[0.5px] border-border shadow-border active:border-[1px] relative';
   
   const variants = {
-    primary: 'bg-primary text-white border-primary/20 hover:bg-primary/95',
+    primary: 'bg-green text-white border-green/20 hover:bg-green/95',
     secondary: 'bg-white text-foreground hover:bg-slate-50',
-    outline: 'bg-transparent text-primary border-primary/40 hover:bg-primary/5',
+    outline: 'bg-transparent text-green border-green/40 hover:bg-green/5',
     ghost: 'border-transparent text-muted hover:bg-foreground/5 shadow-none',
     danger: 'bg-error text-white border-error/20 hover:bg-error/90',
   };

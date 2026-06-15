@@ -58,7 +58,7 @@ export function MarketingFooter() {
 					<div className="grid grid-cols-2 gap-12 sm:grid-cols-4 lg:col-span-7">
 						{footerLinks.map((col, i) => (
 							<div key={i}>
-								<h4 className="mb-8 text-lg font-bold text-neutral-400">
+								<h4 className="mb-8 text-lg font-bold text-neutral-400 !uppercase">
 									{col.title}
 								</h4>
 								<ul className="space-y-4">
