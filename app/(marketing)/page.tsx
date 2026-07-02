@@ -8,18 +8,18 @@ export default function MarketingPage() {
 	return (
 		<>
 			{/* Hero Section */}
-			<section className="relative overflow-hidden pt-20 lg:pt-24 pb-32 bg-[#FCFAFC]">
+			<section className="relative overflow-hidden pt-20 lg:pt-24 pb-32 bg-[#F8FAFC]">
 				<div className="mx-auto max-w-[1280px] w-full min-h-[600px] lg:min-h-[984px] flex flex-col justify-center lg:justify-between items-center text-center px-6">
 					<div className="flex justify-center mb-8 lg:mb-0">
-						<div className="flex items-center gap-[10px] w-[199px] h-[40px] p-[8px] rounded-[40px] border-[0.5px] border-green/20 bg-green/10 transition-all hover:bg-green/20 cursor-default justify-center">
+						<div className="flex items-center gap-[10px] w-[199px] h-[40px] p-[8px] rounded-[40px] border-[0.5px] border-[#10B981] bg-[#10B981]/10 transition-all hover:bg-green/20 cursor-default justify-center">
 							<div className="h-2 w-2 rounded-full bg-green animate-pulse" />
-							<span className="text-[11px] font-black text-green tracking-widest uppercase">
+							<span className="text-[15px] text-green tracking-widest uppercase">
 								Welcome to Ogaflow
 							</span>
 						</div>
 					</div>
 
-					<h1 className="w-full max-w-[763px] text-[30px]/[38px] md:text-[45px]/[53px] lg:text-[50px]/[58px] font-bold text-black text-center mb-6 lg:mb-0 font-nunito">
+					<h1 className="w-full max-w-[763px] text-[30px]/[38px] md:text-[45px]/[53px] lg:px-24 lg:text-[50px]/[58px] font-bold text-black text-center mb-6 lg:mb-0 font-nunito !normal-case">
 						One system, every team, all in one place.
 					</h1>
 
@@ -48,7 +48,7 @@ export default function MarketingPage() {
 					</div>
 
 					<div className="flex justify-center mt-8 lg:mt-4">
-						<Button variant="primary" size="lg" className="!bg-green !border-green/20 hover:!bg-green/90 px-8 sm:px-10 py-4 sm:py-5 shadow-2xl shadow-green/30 text-[20px]/[24px] font-bold tracking-[0.02em] font-nunito">
+						<Button variant="primary" size="lg" className="!bg-green !border-green/20 hover:!bg-green/90 px-8 sm:px-10 py-3 sm:py-3.5 text-[20px]/[24px] font-bold tracking-[0.02em] font-nunito">
 							Start Free Trial
 						</Button>
 					</div>
@@ -56,7 +56,7 @@ export default function MarketingPage() {
 			</section>
 
 			{/* Built for Real Teams */}
-			<section className="py-20">
+			<section className="py-20 bg-[#FEFEFE]">
 				<div className="mx-auto max-w-7xl px-6">
 					<div className="mb-10 flex flex-col items-start">
 						<h2 className="mb-6 text-[32px] md:text-[40px] lg:text-[48px] font-bold leading-tight md:leading-[48px] lg:leading-[56px] tracking-[0.02em] text-left font-nunito text-black">
@@ -76,14 +76,14 @@ export default function MarketingPage() {
 						].map((item, i) => (
 							<div
 								key={i}
-								className="flex flex-col gap-6 rounded-[16px] border border-[#878A90] bg-[#F8FAFC] p-8 transition-all hover:bg-white hover:border-green/30 hover:shadow-2xl group"
+								className="flex flex-col gap-6 rounded-[16px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC] p-8 transition-all group"
 							>
 								<div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[8px] bg-green/10 text-green group-hover:scale-110 transition-transform">
 									<span className="material-icons-outlined !text-2xl">
 										{item.icon}
 									</span>
 								</div>
-								<span className="text-lg font-black text-black">
+								<span className="text-lg font-bold text-black">
 									{item.title}
 								</span>
 							</div>
@@ -93,7 +93,7 @@ export default function MarketingPage() {
 			</section>
 
 			{/* Trusted By */}
-			<section className="border-border py-15 bg-[#FCFAFC]">
+			<section className="border-border py-15 bg-[#F8FAFC]">
 				<div className="mx-auto max-w-7xl px-6 text-center">
 					<h3 className="mb-5 text-[24px] font-bold leading-[32px] tracking-[0.02em] text-black font-nunito">
 						TRUSTED BY
@@ -109,10 +109,10 @@ export default function MarketingPage() {
 			</section>
 
 			{/* Modern Platform (Features) */}
-			<section className="bg-neutral-50/50 py-20 border-border/50">
+			<section className="bg-[#FEFEFE] py-20 border-border/50">
 				<div className="mx-auto max-w-7xl px-6">
 					<div className="mb-16 lg:mb-24 text-center">
-						<h2 className="mb-6 text-[32px] md:text-[40px] lg:text-[48px] mx-auto max-w-4xl font-bold leading-tight md:leading-[48px] lg:leading-[56px] tracking-[0.02em] text-center font-nunito text-black">
+						<h2 className="mb-6 text-[32px] md:text-[40px] lg:text-[48px] mx-auto max-w-4xl font-bold leading-tight md:leading-[48px] lg:leading-[56px] lg:px-32 tracking-[0.02em] text-center font-nunito !normal-case text-black">
 							Every employee journey simplified
 						</h2>
 						<p className="mx-auto max-w-3xl text-[20px] font-normal text-black leading-[28px] tracking-[0.02em] font-nunito">
@@ -155,7 +155,7 @@ export default function MarketingPage() {
 						].map((feature, i) => (
 							<div
 								key={i}
-								className="group rounded-[16px] border border-[#878A90] bg-white p-6 transition-all hover:-translate-y-2 hover:border-green/30 hover:shadow-[0_24px_48px_-12px_rgba(0,0,0,0.08)]"
+								className="group rounded-[16px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC] p-6 transition-all hover:-translate-y-2 hover:border-[#10B981]"
 							>
 								<div className="mb-8 flex h-14 w-14 items-center justify-center rounded-[8px] bg-green/10 text-green group-hover:bg-green group-hover:text-white transition-all duration-300">
 									<span className="material-icons-outlined !text-3xl">
@@ -176,20 +176,20 @@ export default function MarketingPage() {
 
 
 			{/* Final CTA */}
-			<section className="py-20 bg-white">
+			<section className="py-20 bg-[#FEFEFE]">
 				<div className="mx-auto max-w-4xl px-6">
-					<div className="rounded-[16px] border border-[#878A90] bg-[#F8FAFC] p-8 sm:p-24 text-center shadow-border relative overflow-hidden group">
-						<h2 className="relative mb-8 text-[32px] md:text-[36px] lg:text-[40px] font-bold leading-tight md:leading-[44px] lg:leading-[56px] tracking-[0.02em] text-center font-nunito text-black">
+					<div className="rounded-[16px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC] p-8 sm:p-24 text-center relative overflow-hidden group">
+						<h2 className="relative mb-8 text-[32px] md:text-[36px] lg:text-[48px] lg:px-8 font-bold leading-tight md:leading-[44px] lg:leading-[56px] tracking-[0.02em] text-center font-nunito text-black">
 							Your team runs better from here
 						</h2>
-						<p className="relative mx-auto mb-14 max-w-2xl text-[18px] font-normal text-black leading-[28px] tracking-[0.02em] text-center font-nunito">
+						<p className="relative mx-auto mb-14 max-w-2xl text-[18px] lg:px-12 font-normal text-black leading-[28px] tracking-[0.02em] text-center font-nunito">
 							Less stress, more time, stronger teams. Join thousands of companies already excelling with EMS.
 						</p>
 						<div className="relative flex flex-col items-center justify-center gap-4 sm:gap-[28px] sm:flex-row">
-							<Button variant="primary" size="lg" className="px-10 py-5 text-[20px]/[24px] font-bold tracking-[0.02em] font-nunito shadow-2xl">
+							<Button variant="primary" size="lg" className="px-10 py-3.5 text-[20px]/[24px] lg:text-[20px] font-bold tracking-[0.02em] font-nunito shadow-2xl">
 								Get Started For Free
 							</Button>
-							<Button variant="outline" size="lg" className="px-10 py-5 text-[20px]/[24px] font-bold tracking-[0.02em] font-nunito">
+							<Button variant="outline" size="lg" className="px-10 py-3.5 text-[20px]/[24px] lg:text-[20px] font-bold tracking-[0.02em] font-nunito">
 								View Pricing
 							</Button>
 						</div>

@@ -17,7 +17,7 @@ export function MarketingHeader() {
 	];
 
 	return (
-		<nav className="sticky top-0 z-50 w-full border-b border-border bg-white/80 backdrop-blur-md">
+		<nav className="sticky top-0 z-50 w-full bg-[#FEFEFE] backdrop-blur-md">
 			<div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
 				<div className="flex items-center gap-12">
 					<Link href="/" className="flex items-center gap-3 group">
@@ -32,9 +32,8 @@ export function MarketingHeader() {
 							<Link
 								key={link.label}
 								href={link.href}
-								className={`text-[16px]/[24px] font-normal transition-colors hover:text-green ${
-									pathname === link.href ? "text-green" : "text-[#878A90]"
-								}`}
+								className={`text-[16px]/[24px] font-normal transition-colors hover:text-green ${pathname === link.href ? "text-green" : "text-[#878A90]"
+									}`}
 							>
 								{link.label}
 							</Link>
@@ -48,7 +47,7 @@ export function MarketingHeader() {
 						<Button
 							variant="primary"
 							size="md"
-							className="!bg-green !border-green/20 hover:!bg-green/90 h-[40px] sm:h-[56px] w-auto sm:w-[316px] px-6 sm:px-0 text-sm sm:text-[16px]/[24px] font-normal shadow-lg shadow-green/20"
+							className="!bg-[#10B981] hover:!bg-[#10B981]/90 h-[40px] sm:h-[56px] w-auto sm:w-[316px] px-6 sm:px-0 text-sm sm:text-[16px]/[24px] font-normal font-medium text-[#F8FAFC]"
 						>
 							Get Started For Free
 						</Button>
@@ -72,9 +71,8 @@ export function MarketingHeader() {
 							<Link
 								key={link.label}
 								href={link.href}
-								className={`text-lg font-bold ${
-									pathname === link.href ? "text-green" : "text-[#878A90]"
-								}`}
+								className={`text-lg font-bold ${pathname === link.href ? "text-green" : "text-[#878A90]"
+									}`}
 								onClick={() => setIsMenuOpen(false)}
 							>
 								{link.label}

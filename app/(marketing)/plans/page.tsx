@@ -82,9 +82,9 @@ export default function PlansPage() {
 	const starterPrice = starterPlan ? calcPlanTotal(starterPlan, seatCount) : 0;
 
 	return (
-		<main className="flex flex-col bg-white overflow-x-hidden">
+		<main className="flex flex-col overflow-x-hidden">
 			{/* Hero Section */}
-			<section className="pt-12 md:pt-20 pb-16 text-center">
+			<section className="pt-12 bg-[#F8FAFC] md:pt-20 pb-16 text-center">
 				<div className="mx-auto max-w-[1280px] w-full flex flex-col justify-center items-center text-center px-6">
 					<h1 className="w-full max-w-[763px] text-[28px]/[36px] md:text-[40px]/[48px] lg:text-[50px]/[58px] font-bold text-black text-center mb-6 lg:mb-4 font-nunito tracking-tight">
 						Simple pricing for teams
@@ -95,147 +95,243 @@ export default function PlansPage() {
 
 					{/* Billing Toggle */}
 					<div className="flex justify-center mb-12 md:mb-16">
-						<div className="flex items-center p-1 bg-green/5 rounded-full border border-green/10">
+						<div className="flex items-center h-[56px] p-1.5 gap-1 bg-[#10B981]/10 rounded-[8px]">
 							<button
 								onClick={() => setBillingCycle("monthly")}
-								className={`px-4 md:px-8 py-2 md:py-3 rounded-full text-xs md:text-sm font-bold transition-all ${billingCycle === "monthly" ? "bg-green text-white shadow-lg shadow-green/20" : "text-green hover:bg-green/5"
+								className={`h-full w-[150px] md:w-[258px] px-2 md:px-6 flex items-center justify-center rounded-[8px] text-[14px] md:text-[15px] font-bold transition-all ${billingCycle === "monthly"
+									? "bg-[#10B981] text-[#F8FAFC] shadow-sm"
+									: "text-[#10B981] hover:bg-[#10B981]/5"
 									}`}
 							>
 								Monthly
 							</button>
 							<button
 								onClick={() => setBillingCycle("annual")}
-								className={`px-4 md:px-8 py-2 md:py-3 rounded-full text-xs md:text-sm font-bold transition-all ${billingCycle === "annual" ? "bg-green text-white shadow-lg shadow-green/20" : "text-green hover:bg-green/5"
+								className={`h-full w-[150px] md:w-[258px] px-2 md:px-6 flex items-center justify-center rounded-[8px] text-[14px] md:text-[15px] font-bold transition-all ${billingCycle === "annual"
+									? "bg-[#10B981] text-[#F8FAFC] shadow-sm"
+									: "text-[#10B981] hover:bg-[#10B981]/5"
 									}`}
 							>
 								Annual (20% off)
 							</button>
 						</div>
 					</div>
+				</div>
+			</section>
 
-					{/* Pricing Cards */}
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
-						{plansLoading && (
-							<p className="col-span-full text-center text-muted-foreground font-medium">
-								Loading plans…
-							</p>
-						)}
-						{plans.map((plan) => (
-							<div
-								key={plan.name}
-								className={`flex flex-col p-6 md:p-8 rounded-[24px] border transition-all hover:shadow-2xl hover:shadow-green/5 ${plan.highlight ? "border-green bg-green/5 ring-1 ring-green/50 shadow-xl shadow-green/5" : "border-border bg-white"
-									}`}
-							>
-								<div className="text-left mb-8">
-									<span className="text-[10px] font-black tracking-[0.2em] text-muted-foreground uppercase block mb-4">
-										{plan.name}
-									</span>
-									<div className="flex items-baseline gap-1">
-										<span className="text-3xl md:text-4xl font-black text-black">
-											{typeof plan.price === "number"
-												? formatNaira(plan.price)
-												: plan.price}
-										</span>
-										{typeof plan.price === "number" && (
-											<span className="text-sm font-bold text-muted-foreground">/mo</span>
-										)}
-									</div>
-									{plan.seatPrice && (
-										<div className="mt-1">
-											<p className="text-[10px] font-bold text-muted-foreground">
-												{formatNaira(plan.seatPrice)}/seat —{" "}
-												{plan.includedSeats ?? 0}{" "}
-												seats included
-											</p>
-										</div>
-									)}
-									<p className="mt-4 text-[13px] font-medium text-black/60 leading-relaxed">
-										{plan.description}
-									</p>
-								</div>
-
-								<div className="mb-8">
-									<Link
-										href={
-											plan.cta === "Contact Us"
-												? "/contact"
-												: `/signup/tenant${"id" in plan && plan.id ? `?planId=${plan.id}` : ""}`
-										}
-									>
-										<Button
-											variant={plan.variant}
-											className={`w-full py-4 rounded-xl text-[18px] font-bold capitalize tracking-[0.02em] font-nunito h-14 ${plan.variant === "primary"
-												? "!bg-green !text-white !border-green/20 hover:!bg-green/90 shadow-lg shadow-green/20"
-												: "!bg-green/10 !text-green !border-green/10 hover:!bg-green/20"
-												}`}
-										>
-											{plan.cta}
-										</Button>
-									</Link>
-								</div>
-
-								<ul className="flex-1 space-y-4 text-left">
-									{plan.features.map((feature) => (
-										<li key={feature} className="flex items-start gap-3">
-											<span className="material-icons-outlined text-[18px] text-green font-bold">
-												check
-											</span>
-											<span className="text-[13px] font-medium text-black/70">{feature}</span>
-										</li>
-									))}
-								</ul>
+			<section className="py-16 px-6 mx-auto w-full max-w-7xl text-center bg-[#FEFEFE]">
+				{/* Pricing Cards */}
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full items-start">
+					{/* FREE */}
+					<div className="group flex flex-col p-6 md:p-8 rounded-[16px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC] transition-all duration-300 hover:-translate-y-2 hover:border-[#10B981] hover:shadow-xl hover:shadow-[#10B981]/10">
+						<div className="text-left mb-6">
+							<span className="text-[12px] font-bold tracking-widest uppercase block mb-4 text-[#878A90] group-hover:text-[#10B981] transition-colors">
+								FREE
+							</span>
+							<div className="flex items-baseline gap-1">
+								<span className="text-[32px] md:text-[40px] font-bold text-[#101622] tracking-tight">
+									$0
+								</span>
+								<span className="text-[14px] font-medium">/mo</span>
 							</div>
-						))}
+
+							<p className="mt-4 text-[13px] md:text-[14px] font-medium text-[#101622] leading-[22px]">
+								Custom solutions for large organisations with complex needs.
+							</p>
+						</div>
+
+						<div className="mb-6">
+							<Link href="/signup/tenant" className="w-full block">
+								<Button className="w-full py-3 rounded-[8px] text-[16px] md:text-[18px] font-bold tracking-[0.02em] font-nunito h-12 md:h-14 !border-transparent shadow-none transition-all !bg-[#10B981]/10 !text-[#10B981] group-hover:!bg-[#10B981] group-hover:!text-[#F8FAFC]">
+									Get Started
+								</Button>
+							</Link>
+						</div>
+
+						<ul className="flex-1 space-y-4 text-left border-t-[0.5px] border-[#AFB1B5] pt-6">
+							{["Up to 5 seats", "Time & attendance", "Basic reporting", "Dedicated account manager"].map((feature) => (
+								<li key={feature} className="flex items-start gap-3">
+									<div className="w-[12px] h-[12px] rounded-[12px] bg-[#10B981]/10 flex items-center justify-center shrink-0 mt-1">
+										<img src="/images/check.png" alt="check" style={{ width: '5.83px', height: '4.47px' }} />
+									</div>
+									<span className="text-[13px] md:text-[14px] font-medium text-[#101622] leading-tight mt-0.5">{feature}</span>
+								</li>
+							))}
+						</ul>
+					</div>
+
+					{/* STARTER */}
+					<div className="group flex flex-col p-6 md:p-8 rounded-[16px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC] transition-all duration-300 hover:-translate-y-2 hover:border-[#10B981] hover:shadow-xl hover:shadow-[#10B981]/10">
+						<div className="text-left mb-6">
+							<span className="text-[12px] font-bold tracking-widest uppercase block mb-4 text-[#878A90] group-hover:text-[#10B981] transition-colors">
+								STARTER
+							</span>
+							<div className="flex items-baseline gap-1">
+								<span className="text-[32px] md:text-[40px] font-bold text-[#101622] tracking-tight">
+									$75
+								</span>
+								<span className="text-[14px] font-medium">/mo</span>
+							</div>
+							<div className="mt-2">
+								<p className="text-[12px] font-medium">
+									$3.00/seat - 25 seats
+								</p>
+							</div>
+							<p className="mt-4 text-[13px] md:text-[14px] font-medium text-[#101622] leading-[22px]">
+								For small teams getting started with HR.
+							</p>
+						</div>
+
+						<div className="mb-6">
+							<Link href="/signup/tenant" className="w-full block">
+								<Button className="w-full py-3 rounded-[8px] text-[16px] md:text-[18px] font-bold tracking-[0.02em] font-nunito h-12 md:h-14 !border-transparent shadow-none transition-all !bg-[#10B981]/10 !text-[#10B981] group-hover:!bg-[#10B981] group-hover:!text-[#F8FAFC]">
+									Get Started
+								</Button>
+							</Link>
+						</div>
+
+						<ul className="flex-1 space-y-4 text-left border-t-[0.5px] border-[#AFB1B5] pt-6">
+							{["Up to 50 seats", "Time & attendance", "Leave management", "Basic reporting", "Email support"].map((feature) => (
+								<li key={feature} className="flex items-start gap-3">
+									<div className="w-[12px] h-[12px] rounded-[12px] bg-[#10B981]/10 flex items-center justify-center shrink-0 mt-1">
+										<img src="/images/check.png" alt="check" style={{ width: '5.83px', height: '4.47px' }} />
+									</div>
+									<span className="text-[13px] md:text-[14px] font-medium text-[#101622] leading-tight mt-0.5">{feature}</span>
+								</li>
+							))}
+						</ul>
+					</div>
+
+					{/* PROFESSIONAL */}
+					<div className="group flex flex-col p-6 md:p-8 rounded-[16px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC] transition-all duration-300 hover:-translate-y-2 hover:border-[#10B981] hover:shadow-xl hover:shadow-[#10B981]/10">
+						<div className="text-left mb-6">
+							<span className="text-[12px] font-bold tracking-widest uppercase block mb-4 text-[#878A90] group-hover:text-[#10B981] transition-colors">
+								PROFESSIONAL
+							</span>
+							<div className="flex items-baseline gap-1">
+								<span className="text-[32px] md:text-[40px] font-bold text-[#101622] tracking-tight">
+									$175
+								</span>
+								<span className="text-[14px] font-medium">/mo</span>
+							</div>
+							<div className="mt-2">
+								<p className="text-[12px] font-medium">
+									$7.00/seat - 25 seats
+								</p>
+							</div>
+							<p className="mt-4 text-[13px] md:text-[14px] font-medium text-[#101622] leading-[22px]">
+								Everything growing teams need to manage people effectively.
+							</p>
+						</div>
+
+						<div className="mb-6">
+							<Link href="/signup/tenant" className="w-full block">
+								<Button className="w-full py-3 rounded-[8px] text-[16px] md:text-[18px] font-bold tracking-[0.02em] font-nunito h-12 md:h-14 !border-transparent shadow-none transition-all !bg-[#10B981]/10 !text-[#10B981] group-hover:!bg-[#10B981] group-hover:!text-[#F8FAFC]">
+									Get Started
+								</Button>
+							</Link>
+						</div>
+
+						<ul className="flex-1 space-y-4 text-left border-t-[0.5px] border-[#AFB1B5] pt-6">
+							{["Up to 500 seats", "Everything in Starter", "Payroll automation", "Performance reviews", "Analytics & insights", "Onboarding workflows", "Priority support"].map((feature) => (
+								<li key={feature} className="flex items-start gap-3">
+									<div className="w-[12px] h-[12px] rounded-[12px] bg-[#10B981]/10 flex items-center justify-center shrink-0 mt-1">
+										<img src="/images/check.png" alt="check" style={{ width: '5.83px', height: '4.47px' }} />
+									</div>
+									<span className="text-[13px] md:text-[14px] font-medium text-[#101622] leading-tight mt-0.5">{feature}</span>
+								</li>
+							))}
+						</ul>
+					</div>
+
+					{/* ENTERPRISE */}
+					<div className="group flex flex-col p-6 md:p-8 rounded-[16px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC] transition-all duration-300 hover:-translate-y-2 hover:border-[#10B981] hover:shadow-xl hover:shadow-[#10B981]/10">
+						<div className="text-left mb-6">
+							<span className="text-[12px] font-bold tracking-widest uppercase block mb-4 text-[#878A90] group-hover:text-[#10B981] transition-colors">
+								ENTERPRISE
+							</span>
+							<div className="flex items-baseline gap-1">
+								<span className="text-[32px] md:text-[40px] font-bold text-[#101622] tracking-tight">
+									Custom
+								</span>
+							</div>
+
+							<p className="mt-4 text-[13px] md:text-[14px] font-medium text-[#101622] leading-[22px]">
+								Custom solutions for large organisations with complex needs.
+							</p>
+						</div>
+
+						<div className="mb-6">
+							<Link href="/contact" className="w-full block">
+								<Button className="w-full py-3 rounded-[8px] text-[16px] md:text-[18px] font-bold tracking-[0.02em] font-nunito h-12 md:h-14 !border-transparent shadow-none transition-all !bg-[#10B981]/10 !text-[#10B981] group-hover:!bg-[#10B981] group-hover:!text-[#F8FAFC]">
+									Contact Us
+								</Button>
+							</Link>
+						</div>
+
+						<ul className="flex-1 space-y-4 text-left border-t-[0.5px] border-[#AFB1B5] pt-6">
+							{["Unlimited seats", "Everything in Professional", "Custom integrations", "Dedicated account manager", "SLA guarantee", "SSO & security", "Custom reporting", "24/7 phone support"].map((feature) => (
+								<li key={feature} className="flex items-start gap-3">
+									<div className="w-[12px] h-[12px] rounded-[12px] bg-[#10B981]/10 flex items-center justify-center shrink-0 mt-1">
+										<img src="/images/check.png" alt="check" style={{ width: '5.83px', height: '4.47px' }} />
+									</div>
+									<span className="text-[13px] md:text-[14px] font-medium text-[#101622] leading-tight mt-0.5">{feature}</span>
+								</li>
+							))}
+						</ul>
 					</div>
 				</div>
 			</section>
 
 			{/* Seat Based Pricing Section */}
-			<section className="py-16 md:py-24 bg-white border-y border-border/10">
+			<section className="py-16 md:py-24 bg-[#FEFEFE] border-y border-border/10">
 				<div className="mx-auto max-w-7xl px-6">
 					<div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-start">
 						<div className="space-y-8">
 							<div className="text-left">
-								<h2 className="w-full max-w-[763px] text-[28px]/[36px] md:text-[40px]/[48px] lg:text-[50px]/[58px] font-bold text-black mb-6 font-nunito tracking-tight">
+								<h2 className="w-full max-w-[763px] text-[28px]/[36px] md:text-[40px]/[48px] lg:text-[50px]/[58px] font-bold text-[#101622] mb-6 font-nunito tracking-tight">
 									Seat based pricing
 								</h2>
-								<p className="w-full max-w-[700px] text-[14px]/[22px] md:text-[18px]/[26px] font-normal text-black mb-10 font-nunito">
+								<p className="w-full max-w-[700px] text-[14px]/[22px] md:text-[18px]/[26px] font-normal text-[#878A90] mb-10 font-nunito">
 									Pay only for the seats you use. Scale up or down anytime.
 								</p>
 							</div>
 
-							<div className="bg-muted/5 p-6 md:p-8 rounded-[24px] border border-border shadow-sm">
+							<div className="bg-[#F8FAFC] p-6 md:p-8 rounded-[16px] border-[0.5px] border-[#AFB1B5]">
 								<div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
-									<span className="text-sm font-black uppercase tracking-widest text-muted-foreground">Number of Seats</span>
-									<div className="flex items-center gap-4 bg-green/5 p-2 rounded-xl border border-green/10">
+									<span className="text-[14px] md:text-[16px] font-bold text-[#101622]">Number of Seats</span>
+									<div className="flex items-center gap-4">
 										<button
 											onClick={() => setSeatCount(Math.max(1, seatCount - 1))}
-											className="w-8 h-8 flex items-center justify-center rounded-lg bg-white border border-border text-green hover:bg-green hover:text-white transition-all shadow-sm"
+											className="w-8 h-8 flex items-center justify-center rounded-[4px] bg-[#10B981]/10 text-[#10B981] hover:bg-[#10B981]/20 transition-all"
 										>
-											<span className="material-icons-outlined text-sm">remove</span>
+											<span className="text-[16px] font-bold leading-none mt-[-2px]">-</span>
 										</button>
-										<span className="text-xl font-black text-green w-12 text-center font-nunito">{seatCount}</span>
+										<span className="text-[18px] md:text-[20px] font-bold text-[#10B981] min-w-[32px] text-center font-nunito">{seatCount}</span>
 										<button
 											onClick={() => setSeatCount(seatCount + 1)}
-											className="w-8 h-8 flex items-center justify-center rounded-lg bg-white border border-border text-green hover:bg-green hover:text-white transition-all shadow-sm"
+											className="w-8 h-8 flex items-center justify-center rounded-[4px] bg-[#10B981]/10 text-[#10B981] hover:bg-[#10B981]/20 transition-all"
 										>
-											<span className="material-icons-outlined text-sm">add</span>
+											<span className="text-[16px] font-bold leading-none mt-[-2px]">+</span>
 										</button>
 									</div>
 								</div>
 
-								<div className="relative pt-6 pb-2">
+								<div className="relative pt-2 pb-2">
 									<input
 										type="range"
 										min="1"
 										max="500"
 										value={seatCount}
 										onChange={(e) => setSeatCount(parseInt(e.target.value))}
-										className="w-full h-2 bg-green/10 rounded-full appearance-none cursor-pointer accent-green"
+										className="w-full h-2 bg-[#10B981]/10 rounded-full appearance-none cursor-pointer accent-[#10B981]"
+										style={{
+											background: `linear-gradient(to right, #10B981 0%, #10B981 ${(seatCount / 500) * 100}%, rgba(16, 185, 129, 0.1) ${(seatCount / 500) * 100}%, rgba(16, 185, 129, 0.1) 100%)`
+										}}
 									/>
 									<div className="flex justify-between mt-4">
-										<span className="text-[10px] font-black text-muted-foreground uppercase">1 seat</span>
-										<span className="text-[10px] font-black text-muted-foreground uppercase">500+ seats</span>
+										<span className="text-[10px] md:text-[12px] font-medium text-[#878A90]">1 seat</span>
+										<span className="text-[10px] md:text-[12px] font-medium text-[#878A90]">500+ seats</span>
 									</div>
 								</div>
 							</div>
@@ -243,46 +339,40 @@ export default function PlansPage() {
 
 						<div className="flex justify-center lg:justify-end">
 							{/* Result Card */}
-							<div className="bg-muted/5 w-full max-w-md p-8 md:p-10 rounded-[32px] border-2 border-green shadow-2xl shadow-green/10 transform hover:scale-[1.01] transition-transform">
-								<div className="text-left mb-8">
-									<span className="text-green text-[16px] font-bold font-nunito tracking-[0.2em] uppercase inline-block mb-6">
-										{starterPlan?.name || "STARTER"}
+							<div className="w-full max-w-md flex flex-col p-6 md:p-8 rounded-[16px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC]">
+								<div className="text-left mb-6">
+									<span className="text-[12px] font-bold tracking-widest uppercase block mb-4 text-[#10B981]">
+										STARTER
 									</span>
 									<div className="flex items-baseline gap-1">
-										<span className="text-5xl md:text-6xl font-black text-black font-nunito tracking-tighter">
-											{formatNaira(starterPrice)}
+										<span className="text-[32px] md:text-[40px] font-bold text-[#101622] tracking-tight">
+											${75 + Math.max(0, seatCount - 25) * 3}
 										</span>
-										<span className="text-lg font-bold text-muted-foreground">/{billingCycle === "monthly" ? "mo" : "yr"}</span>
+										<span className="text-[14px] font-medium text-[#878A90]">/mo</span>
 									</div>
-									<p className="mt-2 text-sm font-bold text-muted-foreground">
-										{formatNaira(starterPlan?.seatPrice || 0)}/seat beyond included — {seatCount} seats
-									</p>
-									<p className="mt-4 text-[15px] font-medium text-black/60 leading-relaxed font-nunito">
-										{starterPlan?.description || "For small teams getting started with HR."}
+									<div className="mt-2">
+										<p className="text-[12px] font-medium text-[#878A90]">
+											$3.00/seat - 25 seats
+										</p>
+									</div>
+									<p className="mt-4 text-[13px] md:text-[14px] font-medium text-[#101622] leading-[22px]">
+										For small teams getting started with HR.
 									</p>
 								</div>
 
-								<Button
-									variant="primary"
-									size="lg"
-									className="w-full py-6 rounded-2xl text-[20px]/[24px] font-bold uppercase tracking-[0.02em] font-nunito !bg-green !text-white !border-green/20 hover:!bg-green/90 shadow-xl shadow-green/20 mb-8 h-16"
-								>
-									Get Started
-								</Button>
+								<div className="mb-6">
+									<Button className="w-full py-3 rounded-[8px] text-[16px] md:text-[18px] font-bold tracking-[0.02em] font-nunito h-12 md:h-14 !border-transparent shadow-none transition-all !bg-[#10B981] !text-[#F8FAFC] hover:!bg-[#10B981]/90">
+										Get Started
+									</Button>
+								</div>
 
-								<ul className="space-y-4">
-									{[
-										"Up to 50 seats",
-										"Time & attendance",
-										"Leave management",
-										"Basic reporting",
-										"Email support",
-									].map((feature) => (
-										<li key={feature} className="flex items-center gap-4">
-											<div className="w-5 h-5 rounded-full bg-green/10 flex items-center justify-center">
-												<span className="material-icons-outlined text-[14px] text-green font-black">check</span>
+								<ul className="flex-1 space-y-4 text-left border-t-[0.5px] border-[#AFB1B5] pt-6">
+									{["Up to 50 seats", "Time & attendance", "Leave management", "Basic reporting", "Email support"].map((feature) => (
+										<li key={feature} className="flex items-start gap-3">
+											<div className="w-[12px] h-[12px] rounded-[12px] bg-[#10B981]/10 flex items-center justify-center shrink-0 mt-1">
+												<img src="/images/check.png" alt="check" style={{ width: '5.83px', height: '4.47px' }} />
 											</div>
-											<span className="text-[14px] font-semibold text-black/80 font-nunito">{feature}</span>
+											<span className="text-[13px] md:text-[14px] font-medium text-[#101622] leading-tight mt-0.5">{feature}</span>
 										</li>
 									))}
 								</ul>
@@ -301,7 +391,7 @@ export default function PlansPage() {
 					<div className="space-y-0">
 						{faqs.map((faq, index) => (
 							<div key={index} className="py-6 md:py-8 border-b border-border/50 last:border-0 group">
-								<h3 className="text-lg md:text-xl font-bold text-black mb-3 md:mb-4 group-hover:text-green transition-colors font-nunito">
+								<h3 className="text-lg md:text-xl font-bold text-black mb-3 md:mb-4 font-nunito">
 									{faq.question}
 								</h3>
 								<p className="text-[14px] md:text-[16px] text-black/70 leading-relaxed font-normal font-nunito">

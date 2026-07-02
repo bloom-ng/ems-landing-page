@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export function MarketingFooter() {
 	const footerLinks = [
@@ -40,7 +41,7 @@ export function MarketingFooter() {
 	];
 
 	return (
-		<footer className="border-t border-border bg-white pt-24 pb-12">
+		<footer className="bg-[#FEFEFE] pt-24 pb-12">
 			<div className="mx-auto max-w-7xl px-6">
 				<div className="mb-24 grid gap-16 lg:grid-cols-12">
 					<div className="lg:col-span-5">
@@ -51,7 +52,7 @@ export function MarketingFooter() {
 							</span>
 						</div>
 						<p className="max-w-sm text-base text-neutral-400 font-medium">
-							The modern employee management platform for growing teams.
+							One platform to manage your entire workforce
 						</p>
 					</div>
 
@@ -80,8 +81,8 @@ export function MarketingFooter() {
 
 				<div className="flex flex-col items-center justify-center border-t border-border/50 pt-8 gap-6">
 					<div className="flex items-center gap-2">
-						<div className="h-6 w-6 rounded-full border border-border flex items-center justify-center text-[10px] font-black text-neutral-400">
-							©
+						<div className="h-6 w-6 rounded-full flex items-center justify-center text-[10px] font-black text-neutral-400">
+							<Image src="/images/copyright.png" alt="Copyright" width={20} height={20} />
 						</div>
 						<p className="text-sm text-neutral-400">
 							2026. Ogaflow. All rights reserved
