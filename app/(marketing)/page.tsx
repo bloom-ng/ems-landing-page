@@ -186,10 +186,18 @@ export default function MarketingPage() {
 							Less stress, more time, stronger teams. Join thousands of companies already excelling with EMS.
 						</p>
 						<div className="relative flex flex-col items-center justify-center gap-4 sm:gap-[28px] sm:flex-row">
-							<Button variant="primary" size="lg" className="px-10 py-3.5 text-[20px]/[24px] lg:text-[20px] font-bold tracking-[0.02em] font-nunito shadow-2xl">
+							<Button
+								variant="primary"
+								size="lg"
+								className="w-full sm:w-[230px] px-8 !bg-[#10B981] !text-[#F8FAFC] text-[20px]/[24px] font-bold tracking-[0.02em] font-nunito h-14 !border-transparent shadow-none"
+							>
 								Get Started For Free
 							</Button>
-							<Button variant="outline" size="lg" className="px-10 py-3.5 text-[20px]/[24px] lg:text-[20px] font-bold tracking-[0.02em] font-nunito">
+							<Button
+								variant="outline"
+								size="lg"
+								className="w-full sm:w-[230px] px-8 !bg-[#10B981]/10 !text-[#10B981] text-[20px]/[24px] font-bold tracking-[0.02em] font-nunito h-14 !border-transparent shadow-none"
+							>
 								View Pricing
 							</Button>
 						</div>

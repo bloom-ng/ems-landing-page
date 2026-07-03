@@ -59,14 +59,14 @@ export default function SolutionsPage() {
 						<Button
 							variant="primary"
 							size="lg"
-							className="w-full sm:w-[230px] px-8 !bg-[#10B981] hover:!bg-[#10B981]/90 !text-[#F8FAFC] text-[20px]/[24px] font-bold tracking-[0.02em] font-nunito h-14 !border-transparent shadow-none"
+							className="w-full sm:w-[230px] px-8 !bg-[#10B981] !text-[#F8FAFC] text-[20px]/[24px] font-bold tracking-[0.02em] font-nunito h-14 !border-transparent shadow-none"
 						>
 							Explore Platform
 						</Button>
 						<Button
 							variant="outline"
 							size="lg"
-							className="w-full sm:w-[230px] px-8 !bg-[#10B981]/10 hover:!bg-[#10B981]/20 !text-[#10B981] text-[20px]/[24px] font-bold tracking-[0.02em] font-nunito h-14 !border-transparent shadow-none"
+							className="w-full sm:w-[230px] px-8 !bg-[#10B981]/10 !text-[#10B981] text-[20px]/[24px] font-bold tracking-[0.02em] font-nunito h-14 !border-transparent shadow-none"
 						>
 							Book Demo
 						</Button>
@@ -149,7 +149,7 @@ export default function SolutionsPage() {
 							<Button
 								variant="primary"
 								size="lg"
-								className="w-full sm:w-auto px-12 sm:px-14 md:px-16 lg:px-18 py-3 sm:py-4 text-[18px]/[24px] lg:text-[20px] font-bold tracking-[0.02em] font-nunito shadow-2xl h-12 md:h-14"
+								className="w-full sm:w-auto px-12 sm:px-14 md:px-16 lg:px-18 py-3 sm:py-4 text-[18px]/[24px] lg:text-[20px] font-bold tracking-[0.02em] font-nunito h-12 md:h-14"
 							>
 								Book Demo
 							</Button>

@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/Button";
+import Image from "next/image";
 
 export function MarketingHeader() {
 	const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -21,10 +22,11 @@ export function MarketingHeader() {
 			<div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
 				<div className="flex items-center gap-12">
 					<Link href="/" className="flex items-center gap-3 group">
-						<div className="h-8 w-6 rounded-inner bg-green transition-transform group-hover:scale-110 shadow-sm" />
+						{/* <div className="h-8 w-6 rounded-inner bg-green transition-transform group-hover:scale-110 shadow-sm" />
 						<span className="text-xl font-black tracking-tighter text-black">
 							OGAFLOW
-						</span>
+						</span> */}
+						<Image src="/images/ogaflow-logo.png" alt="OgaFlow Logo" width={150} height={150} />
 					</Link>
 
 					<div className="hidden items-center gap-8 lg:flex">

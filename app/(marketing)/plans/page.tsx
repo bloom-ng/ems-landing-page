@@ -123,7 +123,7 @@ export default function PlansPage() {
 				{/* Pricing Cards */}
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full items-start">
 					{/* FREE */}
-					<div className="group flex flex-col p-6 md:p-8 rounded-[16px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC] transition-all duration-300 hover:-translate-y-2 hover:border-[#10B981] hover:shadow-xl hover:shadow-[#10B981]/10">
+					<div className="group flex flex-col p-6 md:p-8 rounded-[16px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC] transition-all duration-300 hover:-translate-y-2 hover:border-[#10B981]">
 						<div className="text-left mb-6">
 							<span className="text-[12px] font-bold tracking-widest uppercase block mb-4 text-[#878A90] group-hover:text-[#10B981] transition-colors">
 								FREE
@@ -161,7 +161,7 @@ export default function PlansPage() {
 					</div>
 
 					{/* STARTER */}
-					<div className="group flex flex-col p-6 md:p-8 rounded-[16px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC] transition-all duration-300 hover:-translate-y-2 hover:border-[#10B981] hover:shadow-xl hover:shadow-[#10B981]/10">
+					<div className="group flex flex-col p-6 md:p-8 rounded-[16px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC] transition-all duration-300 hover:-translate-y-2 hover:border-[#10B981]">
 						<div className="text-left mb-6">
 							<span className="text-[12px] font-bold tracking-widest uppercase block mb-4 text-[#878A90] group-hover:text-[#10B981] transition-colors">
 								STARTER
@@ -203,7 +203,7 @@ export default function PlansPage() {
 					</div>
 
 					{/* PROFESSIONAL */}
-					<div className="group flex flex-col p-6 md:p-8 rounded-[16px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC] transition-all duration-300 hover:-translate-y-2 hover:border-[#10B981] hover:shadow-xl hover:shadow-[#10B981]/10">
+					<div className="group flex flex-col p-6 md:p-8 rounded-[16px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC] transition-all duration-300 hover:-translate-y-2 hover:border-[#10B981]">
 						<div className="text-left mb-6">
 							<span className="text-[12px] font-bold tracking-widest uppercase block mb-4 text-[#878A90] group-hover:text-[#10B981] transition-colors">
 								PROFESSIONAL
@@ -245,7 +245,7 @@ export default function PlansPage() {
 					</div>
 
 					{/* ENTERPRISE */}
-					<div className="group flex flex-col p-6 md:p-8 rounded-[16px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC] transition-all duration-300 hover:-translate-y-2 hover:border-[#10B981] hover:shadow-xl hover:shadow-[#10B981]/10">
+					<div className="group flex flex-col p-6 md:p-8 rounded-[16px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC] transition-all duration-300 hover:-translate-y-2 hover:border-[#10B981]">
 						<div className="text-left mb-6">
 							<span className="text-[12px] font-bold tracking-widest uppercase block mb-4 text-[#878A90] group-hover:text-[#10B981] transition-colors">
 								ENTERPRISE
