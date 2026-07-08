@@ -28,7 +28,7 @@ export default function MarketingPage() {
 					</p>
 
 					<div className="flex justify-center w-full py-4">
-						<div className="relative w-full max-w-[896px] overflow-hidden rounded-[16px] border border-border bg-green/5 aspect-[16/9] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] group">
+						<div className="relative w-full max-w-[896px] overflow-hidden rounded-[16px] bg-green/5 aspect-[16/9] group">
 							<video
 								className="w-full h-full object-cover"
 								autoPlay
@@ -69,19 +69,17 @@ export default function MarketingPage() {
 
 					<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
 						{[
-							{ title: "Small Businesses (1–50)", icon: "groups" },
-							{ title: "Mid-size (50–500)", icon: "corporate_fare" },
-							{ title: "Enterprise (500+)", icon: "domain" },
-							{ title: "Multi-location", icon: "public" },
+							{ title: "Small Businesses (1–50)", icon: "/icons/people.svg" },
+							{ title: "Mid-size (50–500)", icon: "/icons/building.svg" },
+							{ title: "Enterprise (500+)", icon: "/icons/enterprise.svg" },
+							{ title: "Multi-location", icon: "/icons/world.svg" },
 						].map((item, i) => (
 							<div
 								key={i}
 								className="flex flex-col gap-6 rounded-[16px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC] p-8 transition-all group"
 							>
-								<div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[8px] bg-green/10 text-green group-hover:scale-110 transition-transform">
-									<span className="material-icons-outlined !text-2xl">
-										{item.icon}
-									</span>
+								<div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[8px] bg-green/10 group-hover:scale-110 transition-transform">
+									<img src={item.icon} alt={item.title} className="w-6 h-6 object-contain" />
 								</div>
 								<span className="text-lg font-bold text-black">
 									{item.title}

@@ -119,166 +119,168 @@ export default function PlansPage() {
 				</div>
 			</section>
 
-			<section className="py-16 px-6 mx-auto w-full max-w-7xl text-center bg-[#FEFEFE]">
-				{/* Pricing Cards */}
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full items-start">
-					{/* FREE */}
-					<div className="group flex flex-col p-6 md:p-8 rounded-[16px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC] transition-all duration-300 hover:-translate-y-2 hover:border-[#10B981]">
-						<div className="text-left mb-6">
-							<span className="text-[12px] font-bold tracking-widest uppercase block mb-4 text-[#878A90] group-hover:text-[#10B981] transition-colors">
-								FREE
-							</span>
-							<div className="flex items-baseline gap-1">
-								<span className="text-[32px] md:text-[40px] font-bold text-[#101622] tracking-tight">
-									$0
+			<section className="py-16 w-full bg-[#FEFEFE]">
+				<div className="mx-auto max-w-7xl px-6 text-center">
+					{/* Pricing Cards */}
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full items-start">
+						{/* FREE */}
+						<div className="group flex flex-col p-6 md:p-8 rounded-[16px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC] transition-all duration-300 hover:-translate-y-2 hover:border-[#10B981]">
+							<div className="text-left mb-6">
+								<span className="text-[12px] font-bold tracking-widest uppercase block mb-4 text-[#878A90] group-hover:text-[#10B981] transition-colors">
+									FREE
 								</span>
-								<span className="text-[14px] font-medium">/mo</span>
-							</div>
+								<div className="flex items-baseline gap-1">
+									<span className="text-[32px] md:text-[40px] font-bold text-[#101622] tracking-tight">
+										$0
+									</span>
+									<span className="text-[14px] font-medium">/mo</span>
+								</div>
 
-							<p className="mt-4 text-[13px] md:text-[14px] font-medium text-[#101622] leading-[22px]">
-								Custom solutions for large organisations with complex needs.
-							</p>
-						</div>
-
-						<div className="mb-6">
-							<Link href="/signup/tenant" className="w-full block">
-								<Button className="w-full py-3 rounded-[8px] text-[16px] md:text-[18px] font-bold tracking-[0.02em] font-nunito h-12 md:h-14 !border-transparent shadow-none transition-all !bg-[#10B981]/10 !text-[#10B981] group-hover:!bg-[#10B981] group-hover:!text-[#F8FAFC]">
-									Get Started
-								</Button>
-							</Link>
-						</div>
-
-						<ul className="flex-1 space-y-4 text-left border-t-[0.5px] border-[#AFB1B5] pt-6">
-							{["Up to 5 seats", "Time & attendance", "Basic reporting", "Dedicated account manager"].map((feature) => (
-								<li key={feature} className="flex items-start gap-3">
-									<div className="w-[12px] h-[12px] rounded-[12px] bg-[#10B981]/10 flex items-center justify-center shrink-0 mt-1">
-										<img src="/images/check.png" alt="check" style={{ width: '5.83px', height: '4.47px' }} />
-									</div>
-									<span className="text-[13px] md:text-[14px] font-medium text-[#101622] leading-tight mt-0.5">{feature}</span>
-								</li>
-							))}
-						</ul>
-					</div>
-
-					{/* STARTER */}
-					<div className="group flex flex-col p-6 md:p-8 rounded-[16px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC] transition-all duration-300 hover:-translate-y-2 hover:border-[#10B981]">
-						<div className="text-left mb-6">
-							<span className="text-[12px] font-bold tracking-widest uppercase block mb-4 text-[#878A90] group-hover:text-[#10B981] transition-colors">
-								STARTER
-							</span>
-							<div className="flex items-baseline gap-1">
-								<span className="text-[32px] md:text-[40px] font-bold text-[#101622] tracking-tight">
-									$75
-								</span>
-								<span className="text-[14px] font-medium">/mo</span>
-							</div>
-							<div className="mt-2">
-								<p className="text-[12px] font-medium">
-									$3.00/seat - 25 seats
+								<p className="mt-4 text-[13px] md:text-[14px] font-medium text-[#101622] leading-[22px]">
+									Custom solutions for large organisations with complex needs.
 								</p>
 							</div>
-							<p className="mt-4 text-[13px] md:text-[14px] font-medium text-[#101622] leading-[22px]">
-								For small teams getting started with HR.
-							</p>
-						</div>
 
-						<div className="mb-6">
-							<Link href="/signup/tenant" className="w-full block">
-								<Button className="w-full py-3 rounded-[8px] text-[16px] md:text-[18px] font-bold tracking-[0.02em] font-nunito h-12 md:h-14 !border-transparent shadow-none transition-all !bg-[#10B981]/10 !text-[#10B981] group-hover:!bg-[#10B981] group-hover:!text-[#F8FAFC]">
-									Get Started
-								</Button>
-							</Link>
-						</div>
-
-						<ul className="flex-1 space-y-4 text-left border-t-[0.5px] border-[#AFB1B5] pt-6">
-							{["Up to 50 seats", "Time & attendance", "Leave management", "Basic reporting", "Email support"].map((feature) => (
-								<li key={feature} className="flex items-start gap-3">
-									<div className="w-[12px] h-[12px] rounded-[12px] bg-[#10B981]/10 flex items-center justify-center shrink-0 mt-1">
-										<img src="/images/check.png" alt="check" style={{ width: '5.83px', height: '4.47px' }} />
-									</div>
-									<span className="text-[13px] md:text-[14px] font-medium text-[#101622] leading-tight mt-0.5">{feature}</span>
-								</li>
-							))}
-						</ul>
-					</div>
-
-					{/* PROFESSIONAL */}
-					<div className="group flex flex-col p-6 md:p-8 rounded-[16px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC] transition-all duration-300 hover:-translate-y-2 hover:border-[#10B981]">
-						<div className="text-left mb-6">
-							<span className="text-[12px] font-bold tracking-widest uppercase block mb-4 text-[#878A90] group-hover:text-[#10B981] transition-colors">
-								PROFESSIONAL
-							</span>
-							<div className="flex items-baseline gap-1">
-								<span className="text-[32px] md:text-[40px] font-bold text-[#101622] tracking-tight">
-									$175
-								</span>
-								<span className="text-[14px] font-medium">/mo</span>
+							<div className="mb-6">
+								<Link href="/signup/tenant" className="w-full block">
+									<Button className="w-full py-3 rounded-[8px] text-[16px] md:text-[18px] font-bold tracking-[0.02em] font-nunito h-12 md:h-14 !border-transparent shadow-none transition-all !bg-[#10B981]/10 !text-[#10B981] group-hover:!bg-[#10B981] group-hover:!text-[#F8FAFC]">
+										Get Started
+									</Button>
+								</Link>
 							</div>
-							<div className="mt-2">
-								<p className="text-[12px] font-medium">
-									$7.00/seat - 25 seats
+
+							<ul className="flex-1 space-y-4 text-left border-t-[0.5px] border-[#AFB1B5] pt-6">
+								{["Up to 5 seats", "Time & attendance", "Basic reporting", "Dedicated account manager"].map((feature) => (
+									<li key={feature} className="flex items-start gap-3">
+										<div className="w-[12px] h-[12px] rounded-[12px] bg-[#10B981]/10 flex items-center justify-center shrink-0 mt-1">
+											<img src="/images/check.png" alt="check" style={{ width: '5.83px', height: '4.47px' }} />
+										</div>
+										<span className="text-[13px] md:text-[14px] font-medium text-[#101622] leading-tight mt-0.5">{feature}</span>
+									</li>
+								))}
+							</ul>
+						</div>
+
+						{/* STARTER */}
+						<div className="group flex flex-col p-6 md:p-8 rounded-[16px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC] transition-all duration-300 hover:-translate-y-2 hover:border-[#10B981]">
+							<div className="text-left mb-6">
+								<span className="text-[13px] font-bold tracking-widest uppercase block mb-4 text-[#878A90] group-hover:text-[#10B981] transition-colors">
+									STARTER
+								</span>
+								<div className="flex items-baseline gap-1">
+									<span className="text-[32px] md:text-[40px] font-bold text-[#101622] tracking-tight">
+										$75
+									</span>
+									<span className="text-[14px] font-medium">/mo</span>
+								</div>
+								<div className="mt-2">
+									<p className="text-[13px] font-medium">
+										$3.00/seat - 25 seats
+									</p>
+								</div>
+								<p className="mt-4 text-[13px] md:text-[14px] font-medium text-[#101622] leading-[22px]">
+									For small teams getting started with HR.
 								</p>
 							</div>
-							<p className="mt-4 text-[13px] md:text-[14px] font-medium text-[#101622] leading-[22px]">
-								Everything growing teams need to manage people effectively.
-							</p>
-						</div>
 
-						<div className="mb-6">
-							<Link href="/signup/tenant" className="w-full block">
-								<Button className="w-full py-3 rounded-[8px] text-[16px] md:text-[18px] font-bold tracking-[0.02em] font-nunito h-12 md:h-14 !border-transparent shadow-none transition-all !bg-[#10B981]/10 !text-[#10B981] group-hover:!bg-[#10B981] group-hover:!text-[#F8FAFC]">
-									Get Started
-								</Button>
-							</Link>
-						</div>
-
-						<ul className="flex-1 space-y-4 text-left border-t-[0.5px] border-[#AFB1B5] pt-6">
-							{["Up to 500 seats", "Everything in Starter", "Payroll automation", "Performance reviews", "Analytics & insights", "Onboarding workflows", "Priority support"].map((feature) => (
-								<li key={feature} className="flex items-start gap-3">
-									<div className="w-[12px] h-[12px] rounded-[12px] bg-[#10B981]/10 flex items-center justify-center shrink-0 mt-1">
-										<img src="/images/check.png" alt="check" style={{ width: '5.83px', height: '4.47px' }} />
-									</div>
-									<span className="text-[13px] md:text-[14px] font-medium text-[#101622] leading-tight mt-0.5">{feature}</span>
-								</li>
-							))}
-						</ul>
-					</div>
-
-					{/* ENTERPRISE */}
-					<div className="group flex flex-col p-6 md:p-8 rounded-[16px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC] transition-all duration-300 hover:-translate-y-2 hover:border-[#10B981]">
-						<div className="text-left mb-6">
-							<span className="text-[12px] font-bold tracking-widest uppercase block mb-4 text-[#878A90] group-hover:text-[#10B981] transition-colors">
-								ENTERPRISE
-							</span>
-							<div className="flex items-baseline gap-1">
-								<span className="text-[32px] md:text-[40px] font-bold text-[#101622] tracking-tight">
-									Custom
-								</span>
+							<div className="mb-6">
+								<Link href="/signup/tenant" className="w-full block">
+									<Button className="w-full py-3 rounded-[8px] text-[16px] md:text-[18px] font-bold tracking-[0.02em] font-nunito h-12 md:h-14 !border-transparent shadow-none transition-all !bg-[#10B981]/10 !text-[#10B981] group-hover:!bg-[#10B981] group-hover:!text-[#F8FAFC]">
+										Get Started
+									</Button>
+								</Link>
 							</div>
 
-							<p className="mt-4 text-[13px] md:text-[14px] font-medium text-[#101622] leading-[22px]">
-								Custom solutions for large organisations with complex needs.
-							</p>
+							<ul className="flex-1 space-y-4 text-left border-t-[0.5px] border-[#AFB1B5] pt-6">
+								{["Up to 50 seats", "Time & attendance", "Leave management", "Basic reporting", "Email support"].map((feature) => (
+									<li key={feature} className="flex items-start gap-3">
+										<div className="w-[12px] h-[12px] rounded-[12px] bg-[#10B981]/10 flex items-center justify-center shrink-0 mt-1">
+											<img src="/images/check.png" alt="check" style={{ width: '5.83px', height: '4.47px' }} />
+										</div>
+										<span className="text-[13px] md:text-[14px] font-medium text-[#101622] leading-tight mt-0.5">{feature}</span>
+									</li>
+								))}
+							</ul>
 						</div>
 
-						<div className="mb-6">
-							<Link href="/contact" className="w-full block">
-								<Button className="w-full py-3 rounded-[8px] text-[16px] md:text-[18px] font-bold tracking-[0.02em] font-nunito h-12 md:h-14 !border-transparent shadow-none transition-all !bg-[#10B981]/10 !text-[#10B981] group-hover:!bg-[#10B981] group-hover:!text-[#F8FAFC]">
-									Contact Us
-								</Button>
-							</Link>
+						{/* PROFESSIONAL */}
+						<div className="group flex flex-col p-6 md:p-8 rounded-[16px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC] transition-all duration-300 hover:-translate-y-2 hover:border-[#10B981]">
+							<div className="text-left mb-6">
+								<span className="text-[13px] font-bold tracking-widest uppercase block mb-4 text-[#878A90] group-hover:text-[#10B981] transition-colors">
+									PROFESSIONAL
+								</span>
+								<div className="flex items-baseline gap-1">
+									<span className="text-[32px] md:text-[40px] font-bold text-[#101622] tracking-tight">
+										$175
+									</span>
+									<span className="text-[14px] font-medium">/mo</span>
+								</div>
+								<div className="mt-2">
+									<p className="text-[13px] font-medium">
+										$7.00/seat - 25 seats
+									</p>
+								</div>
+								<p className="mt-4 text-[13px] md:text-[14px] font-medium text-[#101622] leading-[22px]">
+									Everything growing teams need to manage people effectively.
+								</p>
+							</div>
+
+							<div className="mb-6">
+								<Link href="/signup/tenant" className="w-full block">
+									<Button className="w-full py-3 rounded-[8px] text-[16px] md:text-[18px] font-bold tracking-[0.02em] font-nunito h-12 md:h-14 !border-transparent shadow-none transition-all !bg-[#10B981]/10 !text-[#10B981] group-hover:!bg-[#10B981] group-hover:!text-[#F8FAFC]">
+										Get Started
+									</Button>
+								</Link>
+							</div>
+
+							<ul className="flex-1 space-y-4 text-left border-t-[0.5px] border-[#AFB1B5] pt-6">
+								{["Up to 500 seats", "Everything in Starter", "Payroll automation", "Performance reviews", "Analytics & insights", "Onboarding workflows", "Priority support"].map((feature) => (
+									<li key={feature} className="flex items-start gap-3">
+										<div className="w-[12px] h-[12px] rounded-[12px] bg-[#10B981]/10 flex items-center justify-center shrink-0 mt-1">
+											<img src="/images/check.png" alt="check" style={{ width: '5.83px', height: '4.47px' }} />
+										</div>
+										<span className="text-[13px] md:text-[14px] font-medium text-[#101622] leading-tight mt-0.5">{feature}</span>
+									</li>
+								))}
+							</ul>
 						</div>
 
-						<ul className="flex-1 space-y-4 text-left border-t-[0.5px] border-[#AFB1B5] pt-6">
-							{["Unlimited seats", "Everything in Professional", "Custom integrations", "Dedicated account manager", "SLA guarantee", "SSO & security", "Custom reporting", "24/7 phone support"].map((feature) => (
-								<li key={feature} className="flex items-start gap-3">
-									<div className="w-[12px] h-[12px] rounded-[12px] bg-[#10B981]/10 flex items-center justify-center shrink-0 mt-1">
-										<img src="/images/check.png" alt="check" style={{ width: '5.83px', height: '4.47px' }} />
-									</div>
-									<span className="text-[13px] md:text-[14px] font-medium text-[#101622] leading-tight mt-0.5">{feature}</span>
-								</li>
-							))}
-						</ul>
+						{/* ENTERPRISE */}
+						<div className="group flex flex-col p-6 md:p-8 rounded-[16px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC] transition-all duration-300 hover:-translate-y-2 hover:border-[#10B981]">
+							<div className="text-left mb-6">
+								<span className="text-[12px] font-bold tracking-widest uppercase block mb-4 text-[#878A90] group-hover:text-[#10B981] transition-colors">
+									ENTERPRISE
+								</span>
+								<div className="flex items-baseline gap-1">
+									<span className="text-[32px] md:text-[40px] font-bold text-[#101622] tracking-tight">
+										Custom
+									</span>
+								</div>
+
+								<p className="mt-4 text-[13px] md:text-[14px] font-medium text-[#101622] leading-[22px]">
+									Custom solutions for large organisations with complex needs.
+								</p>
+							</div>
+
+							<div className="mb-6 mt-auto">
+								<Link href="/contact" className="w-full block">
+									<Button className="w-full py-3 rounded-[8px] text-[16px] md:text-[18px] font-bold tracking-[0.02em] font-nunito h-12 md:h-14 !border-transparent shadow-none transition-all !bg-[#10B981]/10 !text-[#10B981] group-hover:!bg-[#10B981] group-hover:!text-[#F8FAFC]">
+										Contact Us
+									</Button>
+								</Link>
+							</div>
+
+							<ul className="flex-1 space-y-4 text-left border-t-[0.5px] border-[#AFB1B5] pt-6">
+								{["Unlimited seats", "Everything in Professional", "Custom integrations", "Dedicated account manager", "SLA guarantee", "SSO & security", "Custom reporting", "24/7 phone support"].map((feature) => (
+									<li key={feature} className="flex items-start gap-3">
+										<div className="w-[12px] h-[12px] rounded-[12px] bg-[#10B981]/10 flex items-center justify-center shrink-0 mt-1">
+											<img src="/images/check.png" alt="check" style={{ width: '5.83px', height: '4.47px' }} />
+										</div>
+										<span className="text-[13px] md:text-[14px] font-medium text-[#101622] leading-tight mt-0.5">{feature}</span>
+									</li>
+								))}
+							</ul>
+						</div>
 					</div>
 				</div>
 			</section>
@@ -341,7 +343,7 @@ export default function PlansPage() {
 							{/* Result Card */}
 							<div className="w-full max-w-md flex flex-col p-6 md:p-8 rounded-[16px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC]">
 								<div className="text-left mb-6">
-									<span className="text-[12px] font-bold tracking-widest uppercase block mb-4 text-[#10B981]">
+									<span className="text-[13px] font-bold tracking-widest uppercase block mb-4 text-[#10B981]">
 										STARTER
 									</span>
 									<div className="flex items-baseline gap-1">
@@ -351,7 +353,7 @@ export default function PlansPage() {
 										<span className="text-[14px] font-medium text-[#878A90]">/mo</span>
 									</div>
 									<div className="mt-2">
-										<p className="text-[12px] font-medium text-[#878A90]">
+										<p className="text-[13px] font-medium text-[#878A90]">
 											$3.00/seat - 25 seats
 										</p>
 									</div>

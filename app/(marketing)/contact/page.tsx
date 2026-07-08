@@ -97,36 +97,36 @@ export default function ContactPage() {
 						{/* Form */}
 						<form className="space-y-4 md:space-y-6">
 							<div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-								<div className="space-y-1.5">
+								<div className="space-y-1.5 flex flex-col gap-2">
 									<label className="text-[13px] md:text-[14px] font-medium text-[#101622] font-nunito">Full name</label>
 									<input
 										type="text"
 										placeholder="Jace Norman"
-										className="w-full px-4 md:px-5 py-3 md:py-4 rounded-xl border border-border bg-white focus:outline-none focus:ring-2 focus:ring-[#10B981]/20 focus:border-[#10B981] transition-all font-nunito text-[14px] md:text-[16px]"
+										className="w-full px-4 md:px-5 py-3 md:py-4 rounded-xl border-[0.5px] border-[#AFB1B5] bg-white focus:outline-none focus:ring-2 focus:ring-[#10B981]/20 focus:border-[#10B981] transition-all font-nunito text-[14px] md:text-[16px]"
 									/>
 								</div>
-								<div className="space-y-1.5">
+								<div className="space-y-1.5 flex flex-col gap-2">
 									<label className="text-[13px] md:text-[14px] font-medium text-[#101622] font-nunito">Work email</label>
 									<input
 										type="email"
 										placeholder="add@company.com"
-										className="w-full px-4 md:px-5 py-3 md:py-4 rounded-xl border border-border bg-white focus:outline-none focus:ring-2 focus:ring-[#10B981]/20 focus:border-[#10B981] transition-all font-nunito text-[14px] md:text-[16px]"
+										className="w-full px-4 md:px-5 py-3 md:py-4 rounded-xl border-[0.5px] border-[#AFB1B5] bg-white focus:outline-none focus:ring-2 focus:ring-[#10B981]/20 focus:border-[#10B981] transition-all font-nunito text-[14px] md:text-[16px]"
 									/>
 								</div>
 							</div>
 
 							<div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-								<div className="space-y-1.5">
+								<div className="space-y-1.5 flex flex-col gap-2">
 									<label className="text-[13px] md:text-[14px] font-medium text-[#101622] font-nunito">Company</label>
 									<input
 										type="text"
 										placeholder="Acme Ltd"
-										className="w-full px-4 md:px-5 py-3 md:py-4 rounded-xl border border-border bg-white focus:outline-none focus:ring-2 focus:ring-[#10B981]/20 focus:border-[#10B981] transition-all font-nunito text-[14px] md:text-[16px]"
+										className="w-full px-4 md:px-5 py-3 md:py-4 rounded-xl border-[0.5px] border-[#AFB1B5] bg-white focus:outline-none focus:ring-2 focus:ring-[#10B981]/20 focus:border-[#10B981] transition-all font-nunito text-[14px] md:text-[16px]"
 									/>
 								</div>
-								<div className="space-y-1.5">
+								<div className="space-y-1.5 flex flex-col gap-2">
 									<label className="text-[13px] md:text-[14px] font-medium text-[#101622] font-nunito">Team size</label>
-									<select className="w-full px-4 md:px-5 py-3 md:py-4 rounded-xl border border-border bg-white focus:outline-none focus:ring-2 focus:ring-[#10B981]/20 focus:border-[#10B981] transition-all font-nunito cursor-pointer text-[14px] md:text-[16px]">
+									<select className="w-full px-4 md:px-5 py-3 md:py-4 rounded-xl border-[0.5px] border-[#AFB1B5] bg-white focus:outline-none focus:ring-2 focus:ring-[#10B981]/20 focus:border-[#10B981] transition-all font-nunito cursor-pointer text-[14px] md:text-[16px]">
 										<option>10</option>
 										<option>50</option>
 										<option>100</option>
@@ -135,12 +135,12 @@ export default function ContactPage() {
 								</div>
 							</div>
 
-							<div className="space-y-1.5">
+							<div className="space-y-1.5 flex flex-col gap-2">
 								<label className="text-[13px] md:text-[14px] font-medium text-[#101622] font-nunito">Message</label>
 								<textarea
 									rows={4}
 									placeholder="Tell us about your team and what you need..."
-									className="w-full px-4 md:px-5 py-3 md:py-4 rounded-xl border border-border bg-white focus:outline-none focus:ring-2 focus:ring-[#10B981]/20 focus:border-[#10B981] transition-all font-nunito resize-none text-[14px] md:text-[16px]"
+									className="w-full px-4 md:px-5 py-3 md:py-4 rounded-xl border-[0.5px] border-[#AFB1B5] bg-white focus:outline-none focus:ring-2 focus:ring-[#10B981]/20 focus:border-[#10B981] transition-all font-nunito resize-none text-[14px] md:text-[16px]"
 								/>
 							</div>
 
@@ -154,8 +154,8 @@ export default function ContactPage() {
 								</Button>
 							</div>
 
-							<p className="text-center text-[12px] text-[#878A90] font-nunito mt-6">
-								By submitting, you agree to our <a href="#" className="underline hover:text-[#10B981] transition-colors">Privacy Policy</a>.
+							<p className="text-center text-[14px] text-[#101622] font-nunito mt-6">
+								By submitting, you agree to our Privacy Policy.
 							</p>
 						</form>
 					</div>

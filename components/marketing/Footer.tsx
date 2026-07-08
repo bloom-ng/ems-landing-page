@@ -44,15 +44,15 @@ export function MarketingFooter() {
 		<footer className="bg-[#FEFEFE] pt-24 pb-12">
 			<div className="mx-auto max-w-7xl px-6">
 				<div className="mb-24 grid gap-16 lg:grid-cols-12">
-					<div className="lg:col-span-5">
-						<div className="mb-8 flex items-center gap-3">
+					<div className="lg:-mt-12 lg:col-span-5">
+						<div className="gap-3">
 							{/* <div className="h-8 w-6 rounded-inner bg-green shadow-sm" />
 							<span className="text-2xl font-black tracking-tighter text-black">
 								OGAFLOW
 							</span> */}
 							<Image src="/images/ogaflow-logo.png" alt="OgaFlow Logo" width={150} height={150} />
 						</div>
-						<p className="max-w-sm text-base text-neutral-400 font-medium">
+						<p className="max-w-sm lg:pr-20 lg:-mt-6 text-[20px] text-neutral-400 font-medium">
 							One platform to manage your entire workforce
 						</p>
 					</div>

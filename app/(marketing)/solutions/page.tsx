@@ -12,28 +12,28 @@ export default function SolutionsPage() {
 			id: 1,
 			title: "Employee Self-Service Access",
 			desc: "Allow employees to securely access assigned records, attendance information, and workplace updates.",
-			icon: "calendar_month",
+			icon: "/icons/employee.svg",
 			category: "HR",
 		},
 		{
 			id: 2,
 			title: "Seamless Payroll",
 			desc: "Ensure accurate and transparent payroll auditing that aligns with employee and attendance records.",
-			icon: "payments",
+			icon: "/icons/cash.svg",
 			category: "Accounting",
 		},
 		{
 			id: 3,
 			title: "Performance Tracking",
 			desc: "Track goals, KPIs, appraisals, and employee performance to support growth and productivity.",
-			icon: "bar_chart",
+			icon: "/icons/chart.svg",
 			category: "Employee",
 		},
 		{
 			id: 4,
 			title: "Financial Record Management",
 			desc: "Store and manage company financial records securely within one centralized ecosystem.",
-			icon: "language",
+			icon: "/icons/record.svg",
 			category: "Accounting",
 		},
 	];
@@ -116,10 +116,8 @@ export default function SolutionsPage() {
 								key={feature.id}
 								className="group flex flex-col gap-6 rounded-[24px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC] p-6 md:p-10 hover:-translate-y-1 hover:border-[#10B981]"
 							>
-								<div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-green/10 text-green group-hover:bg-green group-hover:text-white transition-all duration-300">
-									<span className="material-icons-outlined !text-3xl">
-										{feature.icon}
-									</span>
+								<div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#10B981]/10 ">
+									<img src={feature.icon} alt={feature.title} className="w-8 h-8 object-contain" />
 								</div>
 								<div>
 									<h3 className="mb-3 text-xl md:text-2xl font-bold font-nunito text-black">
