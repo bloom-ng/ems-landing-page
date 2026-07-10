@@ -12,19 +12,94 @@ export default function PlansPage() {
 	const [apiPlans, setApiPlans] = useState<PublicPlan[]>([]);
 	const [plansLoading, setPlansLoading] = useState(true);
 
+	const STATIC_PLAN_FEATURES: Record<number, { title: string }[]> = {
+		750: [
+			{ title: "Employee Database Management" },
+			{ title: "HR Management" },
+			{ title: "Accounting Management" },
+			{ title: "Roles & Access Management" },
+		],
+		1500: [
+			{ title: "Everything in tier 1" },
+			{ title: "Department Management" },
+			{ title: "Financial Operations" },
+			{ title: "Survey & Appraisal Management" },
+		],
+		2500: [
+			{ title: "Everything in tier 2" },
+			{ title: "Advanced Accounting Tools" },
+			{ title: "Helpdesk Management" },
+			{ title: "Recruitment & Requisition Management" },
+			{ title: "Project Management" },
+			{ title: "Company Policies & Knowledge Management" },
+		],
+	};
+
+	// Real plan data from api.ogaflow.com/public/plans (used as fallback when proxy is unavailable locally)
+	const FALLBACK_PLANS: PublicPlan[] = [
+		{
+			id: "82c3f9ac-ceac-4652-b293-7d7f3670e284",
+			name: "Tier 1",
+			tier: "STARTER",
+			description: null,
+			currency: "NGN",
+			priceMonthly: 0,
+			priceYearly: 0,
+			seatPrice: 750,
+			includedSeats: 0,
+			employeeLimit: null,
+			trialDays: null,
+			features: [],
+		},
+		{
+			id: "7825c4cc-9196-4812-83aa-803aff06524c",
+			name: "Tier 2",
+			tier: "PRO",
+			description: null,
+			currency: "NGN",
+			priceMonthly: 0,
+			priceYearly: 0,
+			seatPrice: 1500,
+			includedSeats: 0,
+			employeeLimit: null,
+			trialDays: null,
+			features: [],
+		},
+		{
+			id: "a0127e2a-177f-4800-9ff9-614a18cd0dda",
+			name: "Tier 3",
+			tier: "ENTERPRISE",
+			description: null,
+			currency: "NGN",
+			priceMonthly: 0,
+			priceYearly: 0,
+			seatPrice: 2500,
+			includedSeats: 0,
+			employeeLimit: null,
+			trialDays: null,
+			features: [],
+		},
+	];
+
 	useEffect(() => {
-		fetch("/api/plans")
-			.then((res) => res.json())
+		fetch("/api/proxy/plans")
+			.then((res) => {
+				if (!res.ok) throw new Error("proxy failed");
+				return res.json();
+			})
 			.then((payload) => {
 				if (payload && typeof payload === "object" && "success" in payload && "data" in payload) {
 					setApiPlans(payload.data);
 				} else if (Array.isArray(payload)) {
 					setApiPlans(payload);
 				} else {
-					setApiPlans([]);
+					setApiPlans(FALLBACK_PLANS);
 				}
 			})
-			.catch(() => setApiPlans([]))
+			.catch(() => {
+				// Proxy unavailable locally (macOS LibreSSL TLS issue) — use cached real data
+				setApiPlans(FALLBACK_PLANS);
+			})
 			.finally(() => setPlansLoading(false));
 	}, []);
 
@@ -54,7 +129,7 @@ export default function PlansPage() {
 			cta: "Get Started",
 			ctaHref: "https://app.ogaflow.com/signup/tenant",
 			variant: "outline" as "primary" | "outline",
-			features: plan.features,
+			features: STATIC_PLAN_FEATURES[plan.seatPrice] || [],
 		};
 	});
 
@@ -185,12 +260,12 @@ export default function PlansPage() {
 
 									{plan.features && plan.features.length > 0 && (
 										<ul className="flex-1 space-y-4 text-left border-t-[0.5px] border-[#AFB1B5] pt-6">
-											{plan.features.map((feature) => (
-												<li key={feature} className="flex items-start gap-3">
+											{plan.features.map((feature: any, idx: number) => (
+												<li key={idx} className="flex items-start gap-3">
 													<div className="w-[12px] h-[12px] rounded-[12px] bg-[#10B981]/10 flex items-center justify-center shrink-0 mt-1">
 														<img src="/images/check.png" alt="check" style={{ width: '5.83px', height: '4.47px' }} />
 													</div>
-													<span className="text-[13px] md:text-[14px] font-medium text-[#101622] leading-tight mt-0.5">{feature}</span>
+												<span className="text-[13px] md:text-[14px] font-medium text-[#101622] leading-tight mt-0.5">{feature.title}</span>
 												</li>
 											))}
 										</ul>
@@ -302,18 +377,16 @@ export default function PlansPage() {
 										</Link>
 									</div>
 
-									{starterPlan.features && starterPlan.features.length > 0 && (
-										<ul className="flex-1 space-y-4 text-left border-t-[0.5px] border-[#AFB1B5] pt-6">
-											{starterPlan.features.map((feature) => (
-												<li key={feature} className="flex items-start gap-3">
-													<div className="w-[12px] h-[12px] rounded-[12px] bg-[#10B981]/10 flex items-center justify-center shrink-0 mt-1">
-														<img src="/images/check.png" alt="check" style={{ width: '5.83px', height: '4.47px' }} />
-													</div>
-													<span className="text-[13px] md:text-[14px] font-medium text-[#101622] leading-tight mt-0.5">{feature}</span>
-												</li>
-											))}
-										</ul>
-									)}
+									<ul className="space-y-4 text-left border-t-[0.5px] border-[#AFB1B5] pt-6">
+										{STATIC_PLAN_FEATURES[starterPlan.seatPrice]?.map((feature, idx) => (
+											<li key={idx} className="flex items-start gap-3">
+												<div className="w-[12px] h-[12px] rounded-[12px] bg-[#10B981]/10 flex items-center justify-center shrink-0 mt-1">
+													<img src="/images/check.png" alt="check" style={{ width: '5.83px', height: '4.47px' }} />
+												</div>
+												<span className="text-[13px] md:text-[14px] font-medium text-[#101622] leading-tight mt-0.5">{feature.title}</span>
+											</li>
+										))}
+									</ul>
 								</div>
 							) : null}
 						</div>

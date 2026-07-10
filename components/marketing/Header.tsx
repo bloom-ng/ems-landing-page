@@ -49,7 +49,7 @@ export function MarketingHeader() {
 						<Button
 							variant="primary"
 							size="md"
-							className="!bg-[#10B981] hover:!bg-[#10B981]/90 h-[40px] sm:h-[56px] w-auto sm:w-[316px] px-6 sm:px-0 text-sm sm:text-[16px]/[24px] font-normal font-medium text-[#F8FAFC]"
+							className="!bg-[#10B981] hover:!bg-[#10B981]/90 h-[40px] sm:h-[50px] w-auto sm:w-[215px] px-6 sm:px-0 text-sm sm:text-[16px]/[24px] font-normal font-medium text-[#F8FAFC]"
 						>
 							Get Started For Free
 						</Button>
