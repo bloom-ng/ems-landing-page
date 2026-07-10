@@ -52,7 +52,7 @@ export default function PlansPage() {
 			includedSeats: plan.includedSeats,
 			trialDays: plan.trialDays,
 			cta: "Get Started",
-			ctaHref: "/signup/tenant",
+			ctaHref: "https://app.ogaflow.com/signup/tenant",
 			variant: "outline" as "primary" | "outline",
 			features: plan.features,
 		};
@@ -176,7 +176,7 @@ export default function PlansPage() {
 									</div>
 
 									<div className="mb-6">
-										<Link href={plan.ctaHref ?? "/signup/tenant"} className="w-full block">
+										<Link href={plan.ctaHref ?? "https://app.ogaflow.com/signup/tenant"} className="w-full block">
 											<Button className="w-full py-3 rounded-[8px] text-[16px] md:text-[18px] font-bold tracking-[0.02em] font-nunito h-12 md:h-14 !border-transparent shadow-none transition-all !bg-[#10B981]/10 !text-[#10B981] group-hover:!bg-[#10B981] group-hover:!text-[#F8FAFC]">
 												{plan.cta}
 											</Button>
@@ -295,7 +295,7 @@ export default function PlansPage() {
 									</div>
 
 									<div className="mb-6">
-										<Link href="/signup/tenant" className="w-full block">
+										<Link href="https://app.ogaflow.com/signup/tenant" className="w-full block">
 											<Button className="w-full py-3 rounded-[8px] text-[16px] md:text-[18px] font-bold tracking-[0.02em] font-nunito h-12 md:h-14 !border-transparent shadow-none transition-all !bg-[#10B981] !text-[#F8FAFC] hover:!bg-[#10B981]/90">
 												Get Started
 											</Button>
