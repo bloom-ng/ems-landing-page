@@ -111,6 +111,9 @@ export default function PlansPage() {
 	}
 
 	const plansFromApi = apiPlans.map((plan) => {
+		const isStarter = plan.tier === "STARTER" || plan.name === "Tier 1";
+		const isEnterprise = plan.tier === "ENTERPRISE" || plan.name === "Tier 3";
+
 		// All plans use seat-based pricing — just display the seatPrice for all tiers
 		const displayPrice = plan.seatPrice > 0
 			? plan.seatPrice
@@ -122,13 +125,13 @@ export default function PlansPage() {
 			id: plan.id,
 			name: plan.name || plan.tier,
 			price: displayPrice,
-			description: plan.description ?? "",
 			seatPrice: plan.seatPrice,
 			includedSeats: plan.includedSeats,
 			trialDays: plan.trialDays,
 			cta: "Get Started",
 			ctaHref: "https://app.ogaflow.com/signup/tenant",
-			variant: "outline" as "primary" | "outline",
+			isStarter,
+			isEnterprise,
 			features: STATIC_PLAN_FEATURES[plan.seatPrice] || [],
 		};
 	});
@@ -217,55 +220,57 @@ export default function PlansPage() {
 							))}
 						</div>
 					) : (
-						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full items-start">
+						<div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full items-start max-w-6xl mx-auto">
 							{plans.map((plan) => (
 								<div
 									key={plan.id}
-									className="group flex flex-col p-6 md:p-8 rounded-[16px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC] transition-all duration-300 hover:-translate-y-2 hover:border-[#10B981]"
+									className={`group flex flex-col p-8 rounded-[16px] border-[0.5px] border-[#E2E8F0] transition-all duration-300 hover:-translate-y-1 hover:border-[#10B981] ${
+										plan.isStarter
+											? "bg-[#FEFEFE] shadow-sm"
+											: "bg-[#F8FAFC]"
+									}`}
 								>
 									<div className="text-left mb-6">
-										<span className="text-[12px] font-bold tracking-widest uppercase block mb-4 text-[#878A90] group-hover:text-[#10B981] transition-colors">
+										<span className={`text-[14px] font-bold tracking-widest uppercase block mb-6 ${
+											plan.isStarter ? "text-[#10B981]" : "text-[#878A90]"
+										}`}>
 											{plan.name}
 										</span>
 
-										<div className="flex items-baseline gap-1">
-											<span className="text-[32px] md:text-[40px] font-bold text-[#101622] tracking-tight">
+										<div className="flex items-baseline mb-4">
+											<span className="text-[40px] md:text-[48px] font-bold text-[#101622] tracking-tight leading-none">
 												{formatNaira(plan.price as number)}
 											</span>
-											<span className="text-[14px] font-medium">/seat</span>
+											<span className="text-[16px] md:text-[18px] font-medium text-[#101622] ml-1">
+												/seat
+											</span>
 										</div>
 
-										{plan.seatPrice > 0 && (
-											<div className="mt-2">
-												<p className="text-[12px] font-medium text-[#878A90]">
-													per seat · billed monthly
-												</p>
-											</div>
-										)}
-
-										{plan.description && (
-											<p className="mt-4 text-[13px] md:text-[14px] font-medium text-[#101622] leading-[22px]">
-												{plan.description}
+										<div className="mb-6">
+											<p className="text-[13px] md:text-[14px] font-medium text-[#878A90]">
+												per seat · billed monthly
 											</p>
-										)}
-									</div>
+										</div>
 
-									<div className="mb-6">
-										<Link href={plan.ctaHref ?? "https://app.ogaflow.com/signup/tenant"} className="w-full block">
-											<Button className="w-full py-3 rounded-[8px] text-[16px] md:text-[18px] font-bold tracking-[0.02em] font-nunito h-12 md:h-14 !border-transparent shadow-none transition-all !bg-[#10B981]/10 !text-[#10B981] group-hover:!bg-[#10B981] group-hover:!text-[#F8FAFC]">
-												{plan.cta}
-											</Button>
-										</Link>
+										<div className="mb-8">
+											<Link href={plan.ctaHref} className="w-full block">
+												<Button className="w-full py-4 rounded-[12px] text-[16px] font-bold tracking-wide font-nunito h-14 !border-transparent shadow-none transition-all !bg-[#10B981]/10 !text-[#10B981] group-hover:!bg-[#10B981] group-hover:!text-[#FEFEFE]">
+													{plan.cta}
+												</Button>
+											</Link>
+										</div>
+
+										<div className="w-full h-[0.5px] bg-[#E2E8F0] mb-8" />
 									</div>
 
 									{plan.features && plan.features.length > 0 && (
-										<ul className="flex-1 space-y-4 text-left border-t-[0.5px] border-[#AFB1B5] pt-6">
+										<ul className="flex-1 space-y-5 text-left">
 											{plan.features.map((feature: any, idx: number) => (
-												<li key={idx} className="flex items-start gap-3">
-													<div className="w-[12px] h-[12px] rounded-[12px] bg-[#10B981]/10 flex items-center justify-center shrink-0 mt-1">
-														<img src="/images/check.png" alt="check" style={{ width: '5.83px', height: '4.47px' }} />
+												<li key={idx} className="flex items-center gap-3.5">
+													<div className="w-[18px] h-[18px] rounded-full bg-[#10B981]/10 flex items-center justify-center shrink-0">
+														<img src="/images/check.png" alt="check" style={{ width: '8px', height: '6px' }} />
 													</div>
-												<span className="text-[13px] md:text-[14px] font-medium text-[#101622] leading-tight mt-0.5">{feature.title}</span>
+													<span className="text-[15px] font-medium text-[#101622] leading-tight">{feature.title}</span>
 												</li>
 											))}
 										</ul>
