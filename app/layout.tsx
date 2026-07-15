@@ -10,7 +10,7 @@ const nunitoSans = Nunito_Sans({
 });
 
 export const metadata: Metadata = {
-	title: "Ems Platform",
+	title: "Ogaflow",
 	description: "Multi-tenant Employee Management System Platform",
 	icons: {
 		icon: "/icons/icon-main.png",
