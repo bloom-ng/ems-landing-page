@@ -12,6 +12,9 @@ const nunitoSans = Nunito_Sans({
 export const metadata: Metadata = {
 	title: "Ems Platform",
 	description: "Multi-tenant Employee Management System Platform",
+	icons: {
+		icon: "/icons/icon-main.png",
+	},
 };
 
 export default function RootLayout({

@@ -11,6 +11,7 @@ export default function PlansPage() {
 	const [seatCount, setSeatCount] = useState(25);
 	const [apiPlans, setApiPlans] = useState<PublicPlan[]>([]);
 	const [plansLoading, setPlansLoading] = useState(true);
+	const [selectedPlanId, setSelectedPlanId] = useState<string | null>(null);
 
 	const STATIC_PLAN_FEATURES: Record<number, { title: string }[]> = {
 		750: [
@@ -103,28 +104,35 @@ export default function PlansPage() {
 			.finally(() => setPlansLoading(false));
 	}, []);
 
+	// Set default selected plan to STARTER once plans load
+	useEffect(() => {
+		if (apiPlans.length > 0 && selectedPlanId === null) {
+			const starter = apiPlans.find((p) => p.tier === "STARTER") ?? apiPlans[0];
+			setSelectedPlanId(starter.id);
+		}
+	}, [apiPlans]);
+
+	/** Price per seat adjusted for billing cycle (annual = 10% off) */
+	function effectiveSeatPrice(plan: PublicPlan) {
+		return billingCycle === "annual"
+			? Math.round(plan.seatPrice * 0.9)
+			: plan.seatPrice;
+	}
+
+	/** Total cost for the result card */
 	function calcPlanTotal(plan: PublicPlan, seats: number) {
-		const base =
-			billingCycle === "annual" ? plan.priceYearly : plan.priceMonthly;
 		const billable = Math.max(0, seats - (plan.includedSeats ?? 0));
-		return base + (plan.seatPrice ?? 0) * billable;
+		return effectiveSeatPrice(plan) * billable;
 	}
 
 	const plansFromApi = apiPlans.map((plan) => {
 		const isStarter = plan.tier === "STARTER" || plan.name === "Tier 1";
 		const isEnterprise = plan.tier === "ENTERPRISE" || plan.name === "Tier 3";
 
-		// All plans use seat-based pricing — just display the seatPrice for all tiers
-		const displayPrice = plan.seatPrice > 0
-			? plan.seatPrice
-			: plan.priceMonthly > 0
-				? plan.priceMonthly
-				: 0;
-
 		return {
 			id: plan.id,
 			name: plan.name || plan.tier,
-			price: displayPrice,
+			price: effectiveSeatPrice(plan),
 			seatPrice: plan.seatPrice,
 			includedSeats: plan.includedSeats,
 			trialDays: plan.trialDays,
@@ -157,8 +165,14 @@ export default function PlansPage() {
 		},
 	];
 
-	const starterPlan = apiPlans.find((p) => p.tier === "STARTER");
-	const starterPrice = starterPlan ? calcPlanTotal(starterPlan, seatCount) : 0;
+	// The plan shown in the seat-based calculator card
+	const selectedApiPlan =
+		apiPlans.find((p) => p.id === selectedPlanId) ??
+		apiPlans.find((p) => p.tier === "STARTER") ??
+		apiPlans[0] ??
+		null;
+
+	const selectedPrice = selectedApiPlan ? calcPlanTotal(selectedApiPlan, seatCount) : 0;
 
 	return (
 		<main className="flex flex-col overflow-x-hidden">
@@ -202,7 +216,7 @@ export default function PlansPage() {
 				<div className="mx-auto max-w-7xl px-6 text-center">
 					{/* Pricing Cards */}
 					{plansLoading ? (
-						/* Loading skeleton – same grid, ghosted cards */
+						/* Loading skeleton */
 						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full items-start">
 							{[1, 2, 3, 4].map((i) => (
 								<div key={i} className="flex flex-col p-6 md:p-8 rounded-[16px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC] animate-pulse">
@@ -221,62 +235,64 @@ export default function PlansPage() {
 						</div>
 					) : (
 						<div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full items-start max-w-6xl mx-auto">
-							{plans.map((plan) => (
-								<div
-									key={plan.id}
-									className={`group flex flex-col p-8 rounded-[16px] border-[0.5px] border-[#E2E8F0] transition-all duration-300 hover:-translate-y-1 hover:border-[#10B981] ${
-										plan.isStarter
-											? "bg-[#FEFEFE] shadow-sm"
-											: "bg-[#F8FAFC]"
-									}`}
-								>
-									<div className="text-left mb-6">
-										<span className={`text-[14px] font-bold tracking-widest uppercase block mb-6 ${
-											plan.isStarter ? "text-[#10B981]" : "text-[#878A90]"
-										}`}>
-											{plan.name}
-										</span>
-
-										<div className="flex items-baseline mb-4">
-											<span className="text-[40px] md:text-[48px] font-bold text-[#101622] tracking-tight leading-none">
-												{formatNaira(plan.price as number)}
+							{plans.map((plan) => {
+								const isSelected = plan.id === selectedPlanId;
+								return (
+									<div
+										key={plan.id}
+										onClick={() => setSelectedPlanId(plan.id)}
+										className={`group flex flex-col p-8 rounded-[16px] border-[0.5px] bg-[#F8FAFC] transition-all duration-300 cursor-pointer hover:-translate-y-1 hover:bg-[#FEFEFE] ${
+											isSelected
+												? "border-[#10B981]"
+												: "border-[#E2E8F0] hover:border-[#10B981]"
+										}`}
+									>
+										<div className="text-left mb-6">
+											<span className={`text-[14px] font-bold tracking-widest uppercase block mb-6 ${plan.isStarter ? "text-[#10B981]" : "text-[#878A90]"}`}>
+												{plan.name}
 											</span>
-											<span className="text-[16px] md:text-[18px] font-medium text-[#101622] ml-1">
-												/seat
-											</span>
+
+											<div className="flex items-baseline mb-4">
+												<span className="text-[40px] md:text-[48px] font-bold text-[#101622] tracking-tight leading-none">
+													{formatNaira(plan.price as number)}
+												</span>
+												<span className="text-[16px] md:text-[18px] font-medium text-[#101622] ml-1">
+													/seat
+												</span>
+											</div>
+
+											<div className="mb-6">
+												<p className="text-[13px] md:text-[14px] font-medium text-[#878A90]">
+													per seat · billed {billingCycle === "annual" ? "annually" : "monthly"}
+												</p>
+											</div>
+
+											<div className="mb-8">
+												<Link href={plan.ctaHref} className="w-full block" onClick={(e) => e.stopPropagation()}>
+													<Button className="w-full py-4 rounded-[12px] text-[16px] font-bold tracking-wide font-nunito h-14 !border-transparent shadow-none transition-all !bg-[#10B981]/10 !text-[#10B981] group-hover:!bg-[#10B981] group-hover:!text-[#FEFEFE]">
+														{plan.cta}
+													</Button>
+												</Link>
+											</div>
+
+											<div className="w-full h-[0.5px] bg-[#E2E8F0] mb-8" />
 										</div>
 
-										<div className="mb-6">
-											<p className="text-[13px] md:text-[14px] font-medium text-[#878A90]">
-												per seat · billed monthly
-											</p>
-										</div>
-
-										<div className="mb-8">
-											<Link href={plan.ctaHref} className="w-full block">
-												<Button className="w-full py-4 rounded-[12px] text-[16px] font-bold tracking-wide font-nunito h-14 !border-transparent shadow-none transition-all !bg-[#10B981]/10 !text-[#10B981] group-hover:!bg-[#10B981] group-hover:!text-[#FEFEFE]">
-													{plan.cta}
-												</Button>
-											</Link>
-										</div>
-
-										<div className="w-full h-[0.5px] bg-[#E2E8F0] mb-8" />
+										{plan.features && plan.features.length > 0 && (
+											<ul className="flex-1 space-y-5 text-left">
+												{plan.features.map((feature: any, idx: number) => (
+													<li key={idx} className="flex items-center gap-3.5">
+														<div className="w-[18px] h-[18px] rounded-full bg-[#10B981]/10 flex items-center justify-center shrink-0">
+															<img src="/images/check.png" alt="check" style={{ width: '8px', height: '6px' }} />
+														</div>
+														<span className="text-[15px] font-medium text-[#101622] leading-tight">{feature.title}</span>
+													</li>
+												))}
+											</ul>
+										)}
 									</div>
-
-									{plan.features && plan.features.length > 0 && (
-										<ul className="flex-1 space-y-5 text-left">
-											{plan.features.map((feature: any, idx: number) => (
-												<li key={idx} className="flex items-center gap-3.5">
-													<div className="w-[18px] h-[18px] rounded-full bg-[#10B981]/10 flex items-center justify-center shrink-0">
-														<img src="/images/check.png" alt="check" style={{ width: '8px', height: '6px' }} />
-													</div>
-													<span className="text-[15px] font-medium text-[#101622] leading-tight">{feature.title}</span>
-												</li>
-											))}
-										</ul>
-									)}
-								</div>
-							))}
+								);
+							})}
 						</div>
 					)}
 				</div>
@@ -350,26 +366,29 @@ export default function PlansPage() {
 										))}
 									</div>
 								</div>
-							) : starterPlan ? (
+							) : selectedApiPlan ? (
 								<div className="w-full max-w-md flex flex-col p-6 md:p-8 rounded-[16px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC]">
 									<div className="text-left mb-6">
 										<span className="text-[13px] font-bold tracking-widest uppercase block mb-4 text-[#10B981]">
-											{starterPlan.name}
+											{selectedApiPlan.name}
 										</span>
 										<div className="flex items-baseline gap-1">
 											<span className="text-[32px] md:text-[40px] font-bold text-[#101622] tracking-tight">
-												{formatNaira(starterPrice)}
+												{formatNaira(selectedPrice)}
 											</span>
 											<span className="text-[14px] font-medium text-[#878A90]">/mo</span>
 										</div>
 										<div className="mt-2">
 											<p className="text-[13px] font-medium text-[#878A90]">
-												{formatNaira(starterPlan.seatPrice)}/seat · {seatCount} seat{seatCount !== 1 ? "s" : ""}
+												{formatNaira(effectiveSeatPrice(selectedApiPlan))}/seat · {seatCount} seat{seatCount !== 1 ? "s" : ""}
+												{billingCycle === "annual" && (
+													<span className="ml-2 text-[#10B981] font-semibold">10% off</span>
+												)}
 											</p>
 										</div>
-										{starterPlan.description && (
+										{selectedApiPlan.description && (
 											<p className="mt-4 text-[13px] md:text-[14px] font-medium text-[#101622] leading-[22px]">
-												{starterPlan.description}
+												{selectedApiPlan.description}
 											</p>
 										)}
 									</div>
@@ -383,7 +402,7 @@ export default function PlansPage() {
 									</div>
 
 									<ul className="space-y-4 text-left border-t-[0.5px] border-[#AFB1B5] pt-6">
-										{STATIC_PLAN_FEATURES[starterPlan.seatPrice]?.map((feature, idx) => (
+										{STATIC_PLAN_FEATURES[selectedApiPlan.seatPrice]?.map((feature, idx) => (
 											<li key={idx} className="flex items-start gap-3">
 												<div className="w-[12px] h-[12px] rounded-[12px] bg-[#10B981]/10 flex items-center justify-center shrink-0 mt-1">
 													<img src="/images/check.png" alt="check" style={{ width: '5.83px', height: '4.47px' }} />
