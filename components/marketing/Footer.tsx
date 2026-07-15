@@ -9,33 +9,28 @@ export function MarketingFooter() {
 		{
 			title: "Product",
 			links: [
-				{ label: "Features", href: "#" },
+				{ label: "Features", href: "/solutions" },
 				{ label: "Solutions", href: "/solutions" },
-				{ label: "Integrations", href: "#" },
-				{ label: "Security", href: "#" },
 			],
 		},
 		{
 			title: "Company",
 			links: [
-				{ label: "Blog", href: "#" },
-				{ label: "Contact Us", href: "#" },
-				{ label: "Pricing", href: "#" },
+				{ label: "Contact Us", href: "/contact" },
+				{ label: "Pricing", href: "/plans" },
 			],
 		},
 		{
 			title: "Resources",
 			links: [
 				{ label: "Documentation", href: "#" },
-				{ label: "Help Centre", href: "#" },
-				{ label: "Reference", href: "#" },
 			],
 		},
 		{
 			title: "Legal",
 			links: [
-				{ label: "Privacy Policy", href: "#" },
-				{ label: "Terms Of Service", href: "#" },
+				{ label: "Privacy Policy", href: "/privacy" },
+				{ label: "Terms Of Service", href: "/terms" },
 			],
 		},
 	];

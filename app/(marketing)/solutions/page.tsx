@@ -56,20 +56,24 @@ export default function SolutionsPage() {
 						Automate scheduling, streamline payroll and unlock performance insight with structured transparency.
 					</p>
 					<div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-[20px] lg:gap-[28px] w-full sm:w-auto">
-						<Button
-							variant="primary"
-							size="lg"
-							className="w-full sm:w-[230px] px-8 !bg-[#10B981] !text-[#F8FAFC] text-[20px]/[24px] font-bold tracking-[0.02em] font-nunito h-14 !border-transparent shadow-none"
-						>
-							Explore Platform
-						</Button>
-						<Button
-							variant="outline"
-							size="lg"
-							className="w-full sm:w-[230px] px-8 !bg-[#10B981]/10 !text-[#10B981] text-[20px]/[24px] font-bold tracking-[0.02em] font-nunito h-14 !border-transparent shadow-none"
-						>
-							Book Demo
-						</Button>
+						<Link href={process.env.NEXT_PUBLIC_FRONTEND_URL ? `${process.env.NEXT_PUBLIC_FRONTEND_URL}/signup/tenant` : "https://app.ogaflow.com/signup/tenant"} className="w-full sm:w-[230px]">
+							<Button
+								variant="primary"
+								size="lg"
+								className="w-full px-8 !bg-[#10B981] !text-[#F8FAFC] text-[20px]/[24px] font-bold tracking-[0.02em] font-nunito h-14 !border-transparent shadow-none"
+							>
+								Explore Platform
+							</Button>
+						</Link>
+						<Link href="/contact#send-message" className="w-full sm:w-[230px]">
+							<Button
+								variant="outline"
+								size="lg"
+								className="w-full px-8 !bg-[#10B981]/10 !text-[#10B981] text-[20px]/[24px] font-bold tracking-[0.02em] font-nunito h-14 !border-transparent shadow-none"
+							>
+								Book Demo
+							</Button>
+						</Link>
 					</div>
 				</div>
 			</section>
@@ -144,13 +148,15 @@ export default function SolutionsPage() {
 							Book a 20-minute demo and we will walk you through everything relevant to your business.
 						</p>
 						<div className="relative flex justify-center">
-							<Button
-								variant="primary"
-								size="lg"
-								className="w-full sm:w-auto px-12 sm:px-14 md:px-16 lg:px-18 py-3 sm:py-4 text-[18px]/[24px] lg:text-[20px] font-bold tracking-[0.02em] font-nunito h-12 md:h-14"
-							>
-								Book Demo
-							</Button>
+							<Link href="/contact#send-message" className="w-full sm:w-auto">
+								<Button
+									variant="primary"
+									size="lg"
+									className="w-full px-12 sm:px-14 md:px-16 lg:px-18 py-3 sm:py-4 text-[18px]/[24px] lg:text-[20px] font-bold tracking-[0.02em] font-nunito h-12 md:h-14"
+								>
+									Book Demo
+								</Button>
+							</Link>
 						</div>
 					</div>
 				</div>

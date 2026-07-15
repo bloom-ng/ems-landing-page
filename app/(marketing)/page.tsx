@@ -48,9 +48,11 @@ export default function MarketingPage() {
 					</div>
 
 					<div className="flex justify-center mt-8 lg:mt-4">
-						<Button variant="primary" size="lg" className="!bg-green !border-green/20 hover:!bg-green/90 px-8 sm:px-10 py-3 sm:py-3.5 text-[20px]/[24px] font-bold tracking-[0.02em] font-nunito">
-							Start Free Trial
-						</Button>
+						<Link href={process.env.NEXT_PUBLIC_FRONTEND_URL ? `${process.env.NEXT_PUBLIC_FRONTEND_URL}/signup/tenant` : "https://app.ogaflow.com/signup/tenant"}>
+							<Button variant="primary" size="lg" className="!bg-green !border-green/20 hover:!bg-green/90 px-8 sm:px-10 py-3 sm:py-3.5 text-[20px]/[24px] font-bold tracking-[0.02em] font-nunito">
+								Start Free Trial
+							</Button>
+						</Link>
 					</div>
 				</div>
 			</section>
@@ -184,20 +186,24 @@ export default function MarketingPage() {
 							Less stress, more time, stronger teams. Join thousands of companies already excelling with EMS.
 						</p>
 						<div className="relative flex flex-col items-center justify-center gap-4 sm:gap-[28px] sm:flex-row">
-							<Button
-								variant="primary"
-								size="lg"
-								className="w-full sm:w-[230px] px-8 !bg-[#10B981] !text-[#F8FAFC] text-[20px]/[24px] font-bold tracking-[0.02em] font-nunito h-14 !border-transparent shadow-none"
-							>
-								Get Started For Free
-							</Button>
-							<Button
-								variant="outline"
-								size="lg"
-								className="w-full sm:w-[230px] px-8 !bg-[#10B981]/10 !text-[#10B981] text-[20px]/[24px] font-bold tracking-[0.02em] font-nunito h-14 !border-transparent shadow-none"
-							>
-								View Pricing
-							</Button>
+							<Link href={process.env.NEXT_PUBLIC_FRONTEND_URL ? `${process.env.NEXT_PUBLIC_FRONTEND_URL}/signup/tenant` : "https://app.ogaflow.com/signup/tenant"} className="w-full sm:w-[230px]">
+								<Button
+									variant="primary"
+									size="lg"
+									className="w-full px-8 !bg-[#10B981] !text-[#F8FAFC] text-[20px]/[24px] font-bold tracking-[0.02em] font-nunito h-14 !border-transparent shadow-none"
+								>
+									Get Started For Free
+								</Button>
+							</Link>
+							<Link href="/plans" className="w-full sm:w-[230px]">
+								<Button
+									variant="outline"
+									size="lg"
+									className="w-full px-8 !bg-[#10B981]/10 !text-[#10B981] text-[20px]/[24px] font-bold tracking-[0.02em] font-nunito h-14 !border-transparent shadow-none"
+								>
+									View Pricing
+								</Button>
+							</Link>
 						</div>
 					</div>
 				</div>

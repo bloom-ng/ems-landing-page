@@ -46,13 +46,15 @@ export function MarketingHeader() {
 				<div className="flex items-center gap-4 sm:gap-[28px]">
 					<div className="hidden sm:flex items-center gap-4 sm:gap-[28px]">
 
-						<Button
-							variant="primary"
-							size="md"
-							className="!bg-[#10B981] hover:!bg-[#10B981]/90 h-[40px] sm:h-[50px] w-auto sm:w-[215px] px-6 sm:px-0 text-sm sm:text-[16px]/[24px] font-normal font-medium text-[#F8FAFC]"
-						>
-							Get Started For Free
-						</Button>
+						<Link href={process.env.NEXT_PUBLIC_FRONTEND_URL ? `${process.env.NEXT_PUBLIC_FRONTEND_URL}/signup/tenant` : "https://app.ogaflow.com/signup/tenant"} className="w-auto sm:w-[215px]">
+							<Button
+								variant="primary"
+								size="md"
+								className="!bg-[#10B981] hover:!bg-[#10B981]/90 h-[40px] sm:h-[50px] w-full px-6 sm:px-0 text-sm sm:text-[16px]/[24px] font-normal font-medium text-[#F8FAFC]"
+							>
+								Get Started For Free
+							</Button>
+						</Link>
 					</div>
 
 					<button
@@ -83,14 +85,16 @@ export function MarketingHeader() {
 						<hr className="border-border" />
 						<div className="flex flex-col gap-4">
 
-							<Button
-								variant="primary"
-								size="lg"
-								className="!bg-green !border-green/20 w-full h-12 font-bold"
-								onClick={() => setIsMenuOpen(false)}
-							>
-								Get Started For Free
-							</Button>
+							<Link href={process.env.NEXT_PUBLIC_FRONTEND_URL ? `${process.env.NEXT_PUBLIC_FRONTEND_URL}/signup/tenant` : "https://app.ogaflow.com/signup/tenant"} className="w-full">
+								<Button
+									variant="primary"
+									size="lg"
+									className="!bg-green !border-green/20 w-full h-12 font-bold"
+									onClick={() => setIsMenuOpen(false)}
+								>
+									Get Started For Free
+								</Button>
+							</Link>
 						</div>
 					</div>
 				</div>

@@ -2,9 +2,61 @@
 
 import React, { useState } from "react";
 import { Button } from "@/components/ui/Button";
+import ReCAPTCHA from "react-google-recaptcha";
 
 export default function ContactPage() {
 	const [activeTab, setActiveTab] = useState("Book a Demo");
+	const [formData, setFormData] = useState({
+		fullName: "",
+		workEmail: "",
+		company: "",
+		teamSize: "10",
+		message: "",
+	});
+	const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+	const [errorMessage, setErrorMessage] = useState("");
+	const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+
+	const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
+		setStatus("loading");
+		setErrorMessage("");
+
+		if (!recaptchaToken) {
+			setStatus("error");
+			setErrorMessage("Please complete the reCAPTCHA verification.");
+			return;
+		}
+
+		try {
+			const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001";
+			const res = await fetch(`${baseUrl}/public/contact`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ ...formData, recaptchaToken }),
+			});
+
+			if (!res.ok) {
+				const errorData = await res.json();
+				throw new Error(errorData.message || "Failed to send message");
+			}
+
+			setStatus("success");
+			setFormData({
+				fullName: "",
+				workEmail: "",
+				company: "",
+				teamSize: "10",
+				message: "",
+			});
+			setRecaptchaToken(null);
+		} catch (err: any) {
+			setStatus("error");
+			setErrorMessage(err.message || "An unexpected error occurred. Please try again.");
+		}
+	};
 
 	const contactInfo = [
 		{
@@ -66,7 +118,7 @@ export default function ContactPage() {
 			</section>
 
 			{/* Form Section */}
-			<section className="w-full bg-[#FEFEFE] py-12 md:py-20">
+			<section id="send-message" className="w-full bg-[#FEFEFE] py-12 md:py-20">
 				<div className="mx-auto max-w-7xl px-6">
 					<div className="bg-[#F8FAFC] p-6 md:p-12 lg:py-8 lg:px-7 py-12 md:py-16 rounded-2xl border-[#AFB1B5] border-[0.5px]">
 						<div className="mb-8 md:mb-10">
@@ -95,12 +147,25 @@ export default function ContactPage() {
 						</div>
 
 						{/* Form */}
-						<form className="space-y-4 md:space-y-6">
+						<form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+							{status === "success" && (
+								<div className="bg-green/10 text-green px-4 py-3 rounded-xl border border-green/20 text-[14px] font-medium font-nunito text-center">
+									Thanks for reaching out! We&apos;ll be in touch soon.
+								</div>
+							)}
+							{status === "error" && (
+								<div className="bg-red-50 text-red-500 px-4 py-3 rounded-xl border border-red-200 text-[14px] font-medium font-nunito text-center">
+									{errorMessage}
+								</div>
+							)}
 							<div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
 								<div className="space-y-1.5 flex flex-col gap-2">
 									<label className="text-[13px] md:text-[14px] font-medium text-[#101622] font-nunito">Full name</label>
 									<input
 										type="text"
+										required
+										value={formData.fullName}
+										onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
 										placeholder="Jace Norman"
 										className="w-full px-4 md:px-5 py-3 md:py-4 rounded-xl border-[0.5px] border-[#AFB1B5] bg-white focus:outline-none focus:ring-2 focus:ring-[#10B981]/20 focus:border-[#10B981] transition-all font-nunito text-[14px] md:text-[16px]"
 									/>
@@ -109,6 +174,9 @@ export default function ContactPage() {
 									<label className="text-[13px] md:text-[14px] font-medium text-[#101622] font-nunito">Work email</label>
 									<input
 										type="email"
+										required
+										value={formData.workEmail}
+										onChange={(e) => setFormData({ ...formData, workEmail: e.target.value })}
 										placeholder="add@company.com"
 										className="w-full px-4 md:px-5 py-3 md:py-4 rounded-xl border-[0.5px] border-[#AFB1B5] bg-white focus:outline-none focus:ring-2 focus:ring-[#10B981]/20 focus:border-[#10B981] transition-all font-nunito text-[14px] md:text-[16px]"
 									/>
@@ -120,17 +188,23 @@ export default function ContactPage() {
 									<label className="text-[13px] md:text-[14px] font-medium text-[#101622] font-nunito">Company</label>
 									<input
 										type="text"
+										value={formData.company}
+										onChange={(e) => setFormData({ ...formData, company: e.target.value })}
 										placeholder="Acme Ltd"
 										className="w-full px-4 md:px-5 py-3 md:py-4 rounded-xl border-[0.5px] border-[#AFB1B5] bg-white focus:outline-none focus:ring-2 focus:ring-[#10B981]/20 focus:border-[#10B981] transition-all font-nunito text-[14px] md:text-[16px]"
 									/>
 								</div>
 								<div className="space-y-1.5 flex flex-col gap-2">
 									<label className="text-[13px] md:text-[14px] font-medium text-[#101622] font-nunito">Team size</label>
-									<select className="w-full px-4 md:px-5 py-3 md:py-4 rounded-xl border-[0.5px] border-[#AFB1B5] bg-white focus:outline-none focus:ring-2 focus:ring-[#10B981]/20 focus:border-[#10B981] transition-all font-nunito cursor-pointer text-[14px] md:text-[16px]">
-										<option>10</option>
-										<option>50</option>
-										<option>100</option>
-										<option>500+</option>
+									<select
+										value={formData.teamSize}
+										onChange={(e) => setFormData({ ...formData, teamSize: e.target.value })}
+										className="w-full px-4 md:px-5 py-3 md:py-4 rounded-xl border-[0.5px] border-[#AFB1B5] bg-white focus:outline-none focus:ring-2 focus:ring-[#10B981]/20 focus:border-[#10B981] transition-all font-nunito cursor-pointer text-[14px] md:text-[16px]"
+									>
+										<option value="10">10</option>
+										<option value="50">50</option>
+										<option value="100">100</option>
+										<option value="500+">500+</option>
 									</select>
 								</div>
 							</div>
@@ -139,18 +213,30 @@ export default function ContactPage() {
 								<label className="text-[13px] md:text-[14px] font-medium text-[#101622] font-nunito">Message</label>
 								<textarea
 									rows={4}
+									required
+									value={formData.message}
+									onChange={(e) => setFormData({ ...formData, message: e.target.value })}
 									placeholder="Tell us about your team and what you need..."
 									className="w-full px-4 md:px-5 py-3 md:py-4 rounded-xl border-[0.5px] border-[#AFB1B5] bg-white focus:outline-none focus:ring-2 focus:ring-[#10B981]/20 focus:border-[#10B981] transition-all font-nunito resize-none text-[14px] md:text-[16px]"
 								/>
 							</div>
 
-							<div className="pt-4">
+							<div className="pt-4 flex justify-center">
+								<ReCAPTCHA
+									sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+									onChange={(token) => setRecaptchaToken(token)}
+								/>
+							</div>
+
+							<div className="pt-2">
 								<Button
+									type="submit"
+									disabled={status === "loading"}
 									variant="primary"
 									size="lg"
-									className="w-full py-6 rounded-2xl text-[18px] md:text-[20px]/[24px] font-bold uppercase tracking-[0.02em] font-nunito !bg-[#10B981] !text-[#F8FAFC] !border-transparent h-16 hover:opacity-90"
+									className="w-full py-6 rounded-2xl text-[18px] md:text-[20px]/[24px] font-bold uppercase tracking-[0.02em] font-nunito !bg-[#10B981] !text-[#F8FAFC] !border-transparent h-16 hover:opacity-90 disabled:opacity-50"
 								>
-									Send Message
+									{status === "loading" ? "Sending..." : "Send Message"}
 								</Button>
 							</div>
 
