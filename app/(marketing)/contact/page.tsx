@@ -29,7 +29,7 @@ export default function ContactPage() {
 		}
 
 		try {
-			const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001";
+			const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 			const res = await fetch(`${baseUrl}/public/contact`, {
 				method: "POST",
 				headers: {
@@ -61,7 +61,7 @@ export default function ContactPage() {
 	const contactInfo = [
 		{
 			label: "Abuja",
-			value: "Gwarinpa, Abuja",
+			value: "Plot 91A 43 Cres, Gwarinpa Estate, Gwarinpa 901108, Federal Capital Territory",
 			icon: "location_on",
 		},
 		{
@@ -71,7 +71,7 @@ export default function ContactPage() {
 		},
 		{
 			label: "Phone",
-			value: "+234 800 OGAFLOW",
+			value: "+234 708 627 8644 || +234 703 138 0418",
 			icon: "call",
 		},
 		{
