@@ -7,14 +7,36 @@ import { Button } from "@/components/ui/Button";
 export default function MarketingPage() {
 	// Don't autoplay the decorative hero video for users who prefer reduced motion
 	const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(false);
+	// The hero video is ~8MB, so we only fetch it when it's worth the bytes:
+	// on larger screens with motion allowed, or after the user taps play on mobile.
+	const [loadVideo, setLoadVideo] = React.useState(false);
+	const videoRef = React.useRef<HTMLVideoElement>(null);
 
 	React.useEffect(() => {
-		const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-		const update = () => setPrefersReducedMotion(mq.matches);
+		const motionMq = window.matchMedia("(prefers-reduced-motion: reduce)");
+		const desktopMq = window.matchMedia("(min-width: 1024px)");
+		const update = () => {
+			setPrefersReducedMotion(motionMq.matches);
+			// Auto-load only on desktop when motion is allowed; otherwise wait for a tap.
+			setLoadVideo((prev) => prev || (desktopMq.matches && !motionMq.matches));
+		};
 		update();
-		mq.addEventListener("change", update);
-		return () => mq.removeEventListener("change", update);
+		motionMq.addEventListener("change", update);
+		desktopMq.addEventListener("change", update);
+		return () => {
+			motionMq.removeEventListener("change", update);
+			desktopMq.removeEventListener("change", update);
+		};
 	}, []);
+
+	// When the source becomes available, tell the element to load and (if allowed) play it.
+	React.useEffect(() => {
+		if (!loadVideo) return;
+		const el = videoRef.current;
+		if (!el) return;
+		el.load();
+		if (!prefersReducedMotion) el.play().catch(() => {});
+	}, [loadVideo, prefersReducedMotion]);
 
 	return (
 		<>
@@ -41,22 +63,34 @@ export default function MarketingPage() {
 					<div className="flex justify-center w-full py-4">
 						<div className="relative w-full max-w-[896px] overflow-hidden rounded-[16px] bg-green/5 aspect-[16/9] group">
 							<video
+								ref={videoRef}
 								className="w-full h-full object-cover"
-								autoPlay={!prefersReducedMotion}
+								poster="/images/hero-poster.jpg"
+								preload="none"
+								autoPlay={loadVideo && !prefersReducedMotion}
 								loop
 								muted
 								playsInline
-								controls={prefersReducedMotion}
+								controls={loadVideo && prefersReducedMotion}
 								aria-label="OgaFlow product demo"
 							>
-								<source src="https://bloomdigitmedia.com/images/hero-vid.mp4" type="video/mp4" />
-								<div className="absolute inset-0 flex items-center justify-center bg-green/5">
-									<span className="text-4xl font-black text-green/20 tracking-tighter uppercase select-none transition-all group-hover:scale-105 group-hover:text-green/20">
-										Video Demo
-									</span>
-								</div>
+								{loadVideo && (
+									<source src="https://bloomdigitmedia.com/images/hero-vid.mp4" type="video/mp4" />
+								)}
 							</video>
 							<div className="absolute inset-0 bg-gradient-to-br from-green/20 via-transparent to-transparent opacity-30 pointer-events-none" />
+							{!loadVideo && (
+								<button
+									type="button"
+									onClick={() => setLoadVideo(true)}
+									aria-label="Play OgaFlow product demo"
+									className="absolute inset-0 flex items-center justify-center bg-black/10 transition-all hover:bg-black/20 cursor-pointer"
+								>
+									<span className="flex items-center justify-center h-16 w-16 rounded-full bg-white/90 shadow-lg transition-transform group-hover:scale-105">
+										<span className="material-icons-outlined text-green text-4xl ml-1">play_arrow</span>
+									</span>
+								</button>
+							)}
 						</div>
 					</div>
 
