@@ -188,9 +188,11 @@ export default function PlansPage() {
 
 					{/* Billing Toggle */}
 					<div className="flex justify-center mb-12 md:mb-16">
-						<div className="flex items-center h-[56px] p-1.5 gap-1 bg-[#10B981]/10 rounded-[8px]">
+						<div className="flex items-center h-[56px] p-1.5 gap-1 bg-[#10B981]/10 rounded-[8px]" role="group" aria-label="Billing cycle">
 							<button
+								type="button"
 								onClick={() => setBillingCycle("monthly")}
+								aria-pressed={billingCycle === "monthly"}
 								className={`h-full w-[150px] md:w-[258px] px-2 md:px-6 flex items-center justify-center rounded-[8px] text-[14px] md:text-[15px] font-bold transition-all ${billingCycle === "monthly"
 									? "bg-[#10B981] text-[#F8FAFC] shadow-sm"
 									: "text-[#10B981] hover:bg-[#10B981]/5"
@@ -199,7 +201,9 @@ export default function PlansPage() {
 								Monthly
 							</button>
 							<button
+								type="button"
 								onClick={() => setBillingCycle("annual")}
+								aria-pressed={billingCycle === "annual"}
 								className={`h-full w-[150px] md:w-[258px] px-2 md:px-6 flex items-center justify-center rounded-[8px] text-[14px] md:text-[15px] font-bold transition-all ${billingCycle === "annual"
 									? "bg-[#10B981] text-[#F8FAFC] shadow-sm"
 									: "text-[#10B981] hover:bg-[#10B981]/5"
@@ -234,13 +238,23 @@ export default function PlansPage() {
 							))}
 						</div>
 					) : (
-						<div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full items-start max-w-6xl mx-auto">
+						<div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full items-start max-w-6xl mx-auto" role="radiogroup" aria-label="Choose a pricing plan">
 							{plans.map((plan) => {
 								const isSelected = plan.id === selectedPlanId;
 								return (
 									<div
 										key={plan.id}
+										role="radio"
+										aria-checked={isSelected}
+										aria-label={`${plan.name} plan`}
+										tabIndex={0}
 										onClick={() => setSelectedPlanId(plan.id)}
+										onKeyDown={(e) => {
+											if (e.key === "Enter" || e.key === " ") {
+												e.preventDefault();
+												setSelectedPlanId(plan.id);
+											}
+										}}
 										className={`group flex flex-col p-8 rounded-[16px] border-[0.5px] bg-[#F8FAFC] transition-all duration-300 cursor-pointer hover:-translate-y-1 hover:bg-[#FEFEFE] ${
 											isSelected
 												? "border-[#10B981]"
@@ -283,7 +297,7 @@ export default function PlansPage() {
 												{plan.features.map((feature: any, idx: number) => (
 													<li key={idx} className="flex items-center gap-3.5">
 														<div className="w-[18px] h-[18px] rounded-full bg-[#10B981]/10 flex items-center justify-center shrink-0">
-															<img src="/images/check.png" alt="check" style={{ width: '8px', height: '6px' }} />
+															<img src="/images/check.png" alt="" aria-hidden="true" style={{ width: '8px', height: '6px' }} />
 														</div>
 														<span className="text-[15px] font-medium text-[#101622] leading-tight">{feature.title}</span>
 													</li>
@@ -314,20 +328,24 @@ export default function PlansPage() {
 
 							<div className="bg-[#F8FAFC] p-6 md:p-8 rounded-[16px] border-[0.5px] border-[#AFB1B5]">
 								<div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
-									<span className="text-[14px] md:text-[16px] font-bold text-[#101622]">Number of Seats</span>
+									<span id="seat-count-label" className="text-[14px] md:text-[16px] font-bold text-[#101622]">Number of Seats</span>
 									<div className="flex items-center gap-4">
 										<button
+											type="button"
+											aria-label="Decrease number of seats"
 											onClick={() => setSeatCount(Math.max(1, seatCount - 1))}
 											className="w-8 h-8 flex items-center justify-center rounded-[4px] bg-[#10B981]/10 text-[#10B981] hover:bg-[#10B981]/20 transition-all"
 										>
-											<span className="text-[16px] font-bold leading-none mt-[-2px]">-</span>
+											<span className="text-[16px] font-bold leading-none mt-[-2px]" aria-hidden="true">-</span>
 										</button>
-										<span className="text-[18px] md:text-[20px] font-bold text-[#10B981] min-w-[32px] text-center font-nunito">{seatCount}</span>
+										<span className="text-[18px] md:text-[20px] font-bold text-[#10B981] min-w-[32px] text-center font-nunito" aria-live="polite">{seatCount}</span>
 										<button
+											type="button"
+											aria-label="Increase number of seats"
 											onClick={() => setSeatCount(seatCount + 1)}
 											className="w-8 h-8 flex items-center justify-center rounded-[4px] bg-[#10B981]/10 text-[#10B981] hover:bg-[#10B981]/20 transition-all"
 										>
-											<span className="text-[16px] font-bold leading-none mt-[-2px]">+</span>
+											<span className="text-[16px] font-bold leading-none mt-[-2px]" aria-hidden="true">+</span>
 										</button>
 									</div>
 								</div>
@@ -339,6 +357,8 @@ export default function PlansPage() {
 										max="500"
 										value={seatCount}
 										onChange={(e) => setSeatCount(parseInt(e.target.value))}
+										aria-labelledby="seat-count-label"
+										aria-valuetext={`${seatCount} seat${seatCount !== 1 ? "s" : ""}`}
 										className="w-full h-2 bg-[#10B981]/10 rounded-full appearance-none cursor-pointer accent-[#10B981]"
 										style={{
 											background: `linear-gradient(to right, #10B981 0%, #10B981 ${(seatCount / 500) * 100}%, rgba(16, 185, 129, 0.1) ${(seatCount / 500) * 100}%, rgba(16, 185, 129, 0.1) 100%)`
@@ -405,7 +425,7 @@ export default function PlansPage() {
 										{STATIC_PLAN_FEATURES[selectedApiPlan.seatPrice]?.map((feature, idx) => (
 											<li key={idx} className="flex items-start gap-3">
 												<div className="w-[12px] h-[12px] rounded-[12px] bg-[#10B981]/10 flex items-center justify-center shrink-0 mt-1">
-													<img src="/images/check.png" alt="check" style={{ width: '5.83px', height: '4.47px' }} />
+													<img src="/images/check.png" alt="" aria-hidden="true" style={{ width: '5.83px', height: '4.47px' }} />
 												</div>
 												<span className="text-[13px] md:text-[14px] font-medium text-[#101622] leading-tight mt-0.5">{feature.title}</span>
 											</li>

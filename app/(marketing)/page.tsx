@@ -5,6 +5,17 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 
 export default function MarketingPage() {
+	// Don't autoplay the decorative hero video for users who prefer reduced motion
+	const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(false);
+
+	React.useEffect(() => {
+		const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+		const update = () => setPrefersReducedMotion(mq.matches);
+		update();
+		mq.addEventListener("change", update);
+		return () => mq.removeEventListener("change", update);
+	}, []);
+
 	return (
 		<>
 			{/* Hero Section */}
@@ -31,10 +42,12 @@ export default function MarketingPage() {
 						<div className="relative w-full max-w-[896px] overflow-hidden rounded-[16px] bg-green/5 aspect-[16/9] group">
 							<video
 								className="w-full h-full object-cover"
-								autoPlay
+								autoPlay={!prefersReducedMotion}
 								loop
 								muted
 								playsInline
+								controls={prefersReducedMotion}
+								aria-label="OgaFlow product demo"
 							>
 								<source src="https://bloomdigitmedia.com/images/hero-vid.mp4" type="video/mp4" />
 								<div className="absolute inset-0 flex items-center justify-center bg-green/5">
@@ -81,7 +94,7 @@ export default function MarketingPage() {
 								className="flex flex-col gap-6 rounded-[16px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC] p-8 transition-all group"
 							>
 								<div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[8px] bg-green/10 group-hover:scale-110 transition-transform">
-									<img src={item.icon} alt={item.title} className="w-6 h-6 object-contain" />
+									<img src={item.icon} alt="" aria-hidden="true" className="w-6 h-6 object-contain" />
 								</div>
 								<span className="text-lg font-bold text-black">
 									{item.title}
@@ -158,7 +171,7 @@ export default function MarketingPage() {
 								className="group rounded-[16px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC] p-6 transition-all hover:-translate-y-2 hover:border-[#10B981]"
 							>
 								<div className="mb-8 flex h-14 w-14 items-center justify-center rounded-[8px] bg-green/10 text-green group-hover:bg-green group-hover:text-white transition-all duration-300">
-									<span className="material-icons-outlined !text-3xl">
+									<span className="material-icons-outlined !text-3xl" aria-hidden="true">
 										{feature.icon}
 									</span>
 								</div>

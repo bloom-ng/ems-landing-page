@@ -88,11 +88,13 @@ export default function SolutionsPage() {
 
 						{/* Tabs and Controls */}
 						<div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-8">
-							<div className="flex overflow-x-auto gap-2 md:gap-4 no-scrollbar">
+							<div className="flex overflow-x-auto gap-2 md:gap-4 no-scrollbar" role="group" aria-label="Filter features by category">
 								{tabs.map((tab) => (
 									<button
 										key={tab}
+										type="button"
 										onClick={() => setActiveTab(tab)}
+										aria-pressed={activeTab === tab}
 										className={`px-5 md:px-6 py-2 rounded-full text-[14px] md:text-[16px] font-bold transition-all whitespace-nowrap ${activeTab === tab
 											? "bg-[#10B981]/10 text-[#101622] border-transparent"
 											: "text-[#878A90] hover:text-[#101622] hover:bg-black/5 border-transparent"
@@ -104,11 +106,11 @@ export default function SolutionsPage() {
 							</div>
 
 							<div className="flex items-center gap-4 hidden md:flex shrink-0">
-								<button className="flex items-center justify-center w-[36px] h-[36px] rounded-full bg-[#10B981]/10 text-[#10B981] hover:bg-[#10B981]/20 transition-all">
-									<span className="material-icons-outlined text-sm">chevron_left</span>
+								<button type="button" aria-label="Previous features" className="flex items-center justify-center w-[36px] h-[36px] rounded-full bg-[#10B981]/10 text-[#10B981] hover:bg-[#10B981]/20 transition-all">
+									<span className="material-icons-outlined text-sm" aria-hidden="true">chevron_left</span>
 								</button>
-								<button className="flex items-center justify-center w-[36px] h-[36px] rounded-full bg-[#10B981] text-white hover:bg-[#10B981]/90 transition-all">
-									<span className="material-icons-outlined text-sm">chevron_right</span>
+								<button type="button" aria-label="Next features" className="flex items-center justify-center w-[36px] h-[36px] rounded-full bg-[#10B981] text-white hover:bg-[#10B981]/90 transition-all">
+									<span className="material-icons-outlined text-sm" aria-hidden="true">chevron_right</span>
 								</button>
 							</div>
 						</div>
@@ -121,7 +123,7 @@ export default function SolutionsPage() {
 								className="group flex flex-col gap-6 rounded-[24px] border-[0.5px] border-[#AFB1B5] bg-[#F8FAFC] p-6 md:p-10 hover:-translate-y-1 hover:border-[#10B981]"
 							>
 								<div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#10B981]/10 ">
-									<img src={feature.icon} alt={feature.title} className="w-8 h-8 object-contain" />
+									<img src={feature.icon} alt="" aria-hidden="true" className="w-8 h-8 object-contain" />
 								</div>
 								<div>
 									<h3 className="mb-3 text-xl md:text-2xl font-bold font-nunito text-black">

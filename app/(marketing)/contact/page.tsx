@@ -103,7 +103,7 @@ export default function ContactPage() {
 								className="bg-white p-6 md:p-8 rounded-[24px] border-[0.5px] border-[#AFB1B5] flex flex-col items-center text-center group"
 							>
 								<div className="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-green/10 flex items-center justify-center text-green mb-4 md:mb-6">
-									<span className="material-icons-outlined !text-xl md:!text-2xl">{info.icon}</span>
+									<span className="material-icons-outlined !text-xl md:!text-2xl" aria-hidden="true">{info.icon}</span>
 								</div>
 								<span className="text-[14px] md:text-[16px] font-bold tracking-[0.02em] text-black font-nunito uppercase mb-2">
 									{info.label}
@@ -131,11 +131,13 @@ export default function ContactPage() {
 						</div>
 
 						{/* Tabs */}
-						<div className="flex flex-wrap gap-2 mb-8 md:mb-10">
+						<div className="flex flex-wrap gap-2 mb-8 md:mb-10" role="group" aria-label="Reason for contacting us">
 							{tabs.map((tab) => (
 								<button
 									key={tab}
+									type="button"
 									onClick={() => setActiveTab(tab)}
+									aria-pressed={activeTab === tab}
 									className={`px-4 md:px-6 py-2 md:py-2.5 rounded-full text-[12px] md:text-[14px] font-bold transition-all ${activeTab === tab
 										? "bg-[#10B981]/10 text-[#101622]"
 										: "text-[#878A90] "
@@ -149,20 +151,23 @@ export default function ContactPage() {
 						{/* Form */}
 						<form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
 							{status === "success" && (
-								<div className="bg-green/10 text-green px-4 py-3 rounded-xl border border-green/20 text-[14px] font-medium font-nunito text-center">
+								<div role="status" className="bg-green/10 text-green px-4 py-3 rounded-xl border border-green/20 text-[14px] font-medium font-nunito text-center">
 									Thanks for reaching out! We&apos;ll be in touch soon.
 								</div>
 							)}
 							{status === "error" && (
-								<div className="bg-red-50 text-red-500 px-4 py-3 rounded-xl border border-red-200 text-[14px] font-medium font-nunito text-center">
+								<div role="alert" className="bg-red-50 text-red-500 px-4 py-3 rounded-xl border border-red-200 text-[14px] font-medium font-nunito text-center">
 									{errorMessage}
 								</div>
 							)}
 							<div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
 								<div className="space-y-1.5 flex flex-col gap-2">
-									<label className="text-[13px] md:text-[14px] font-medium text-[#101622] font-nunito">Full name</label>
+									<label htmlFor="contact-full-name" className="text-[13px] md:text-[14px] font-medium text-[#101622] font-nunito">Full name</label>
 									<input
+										id="contact-full-name"
+										name="fullName"
 										type="text"
+										autoComplete="name"
 										required
 										value={formData.fullName}
 										onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
@@ -171,9 +176,12 @@ export default function ContactPage() {
 									/>
 								</div>
 								<div className="space-y-1.5 flex flex-col gap-2">
-									<label className="text-[13px] md:text-[14px] font-medium text-[#101622] font-nunito">Work email</label>
+									<label htmlFor="contact-work-email" className="text-[13px] md:text-[14px] font-medium text-[#101622] font-nunito">Work email</label>
 									<input
+										id="contact-work-email"
+										name="workEmail"
 										type="email"
+										autoComplete="email"
 										required
 										value={formData.workEmail}
 										onChange={(e) => setFormData({ ...formData, workEmail: e.target.value })}
@@ -185,9 +193,12 @@ export default function ContactPage() {
 
 							<div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
 								<div className="space-y-1.5 flex flex-col gap-2">
-									<label className="text-[13px] md:text-[14px] font-medium text-[#101622] font-nunito">Company</label>
+									<label htmlFor="contact-company" className="text-[13px] md:text-[14px] font-medium text-[#101622] font-nunito">Company</label>
 									<input
+										id="contact-company"
+										name="company"
 										type="text"
+										autoComplete="organization"
 										value={formData.company}
 										onChange={(e) => setFormData({ ...formData, company: e.target.value })}
 										placeholder="Acme Ltd"
@@ -195,8 +206,10 @@ export default function ContactPage() {
 									/>
 								</div>
 								<div className="space-y-1.5 flex flex-col gap-2">
-									<label className="text-[13px] md:text-[14px] font-medium text-[#101622] font-nunito">Team size</label>
+									<label htmlFor="contact-team-size" className="text-[13px] md:text-[14px] font-medium text-[#101622] font-nunito">Team size</label>
 									<select
+										id="contact-team-size"
+										name="teamSize"
 										value={formData.teamSize}
 										onChange={(e) => setFormData({ ...formData, teamSize: e.target.value })}
 										className="w-full px-4 md:px-5 py-3 md:py-4 rounded-xl border-[0.5px] border-[#AFB1B5] bg-white focus:outline-none focus:ring-2 focus:ring-[#10B981]/20 focus:border-[#10B981] transition-all font-nunito cursor-pointer text-[14px] md:text-[16px]"
@@ -210,8 +223,10 @@ export default function ContactPage() {
 							</div>
 
 							<div className="space-y-1.5 flex flex-col gap-2">
-								<label className="text-[13px] md:text-[14px] font-medium text-[#101622] font-nunito">Message</label>
+								<label htmlFor="contact-message" className="text-[13px] md:text-[14px] font-medium text-[#101622] font-nunito">Message</label>
 								<textarea
+									id="contact-message"
+									name="message"
 									rows={4}
 									required
 									value={formData.message}

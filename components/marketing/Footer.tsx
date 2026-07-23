@@ -45,7 +45,7 @@ export function MarketingFooter() {
 							<span className="text-2xl font-black tracking-tighter text-black">
 								OGAFLOW
 							</span> */}
-							<Image src="/images/ogaflow-logo.png" alt="OgaFlow Logo" width={150} height={150} />
+							<Image src="/images/ogaflow-logo.png" alt="OgaFlow" width={150} height={150} />
 						</div>
 						<p className="max-w-sm lg:pr-20 lg:-mt-6 text-[20px] text-neutral-400 font-medium">
 							One platform to manage your entire workforce
@@ -78,7 +78,7 @@ export function MarketingFooter() {
 				<div className="flex flex-col items-center justify-center border-t border-border/50 pt-8 gap-6">
 					<div className="flex items-center gap-2">
 						<div className="h-6 w-6 rounded-full flex items-center justify-center text-[10px] font-black text-neutral-400">
-							<Image src="/images/copyright.png" alt="Copyright" width={20} height={20} />
+							<Image src="/images/copyright.png" alt="" aria-hidden="true" width={20} height={20} />
 						</div>
 						<p className="text-sm text-neutral-400">
 							2026. Ogaflow. All rights reserved
