@@ -62,22 +62,15 @@ export default function MarketingPage() {
 
 					<div className="flex justify-center w-full py-4">
 						<div className="relative w-full max-w-[896px] overflow-hidden rounded-[16px] bg-green/5 aspect-[16/9] group">
-							<video
-								ref={videoRef}
-								className="w-full h-full object-cover"
-								poster="/images/hero-poster.jpg"
-								preload="none"
-								autoPlay={loadVideo && !prefersReducedMotion}
-								loop
-								muted
-								playsInline
-								controls={loadVideo && prefersReducedMotion}
-								aria-label="OgaFlow product demo"
-							>
-								{loadVideo && (
-									<source src="https://bloomdigitmedia.com/images/hero-vid.mp4" type="video/mp4" />
-								)}
-							</video>
+							<iframe
+							  src="https://player.cloudinary.com/embed/?cloud_name=duql9obr2&public_id=ogafllow_czdodp"
+							  width="640"
+							  height="360" 
+							  style="height: auto; width: 100%; aspect-ratio: 640 / 360;"
+							  allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+							  allowfullscreen
+							  frameborder="0"
+							></iframe>
 							<div className="absolute inset-0 bg-gradient-to-br from-green/20 via-transparent to-transparent opacity-30 pointer-events-none" />
 							{!loadVideo && (
 								<button
