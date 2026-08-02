@@ -66,11 +66,11 @@ export default function MarketingPage() {
 							  src="https://player.cloudinary.com/embed/?cloud_name=duql9obr2&public_id=ogafllow_czdodp"
 							  width="640"
 							  height="360" 
-							  style="height: auto; width: 100%; aspect-ratio: 640 / 360;"
+							  style={{height: "auto", width: "100%", aspectRatio: "640 / 360"}}
 							  allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-							  allowfullscreen
-							  frameborder="0"
-							></iframe>
+							  allowFullScreen
+							  frameBorder="0"
+							  />
 							<div className="absolute inset-0 bg-gradient-to-br from-green/20 via-transparent to-transparent opacity-30 pointer-events-none" />
 							{!loadVideo && (
 								<button
