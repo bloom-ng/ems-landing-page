@@ -30,7 +30,7 @@ export default function TermsPage() {
 
 							<div>
 								<h2 className="font-bold text-black mb-2">2. About OgaFlow</h2>
-								<p>OgaFlow is a cloud-based Employee Management System that enables organizations to manage employee records, departments, payroll, attendance, projects, customer management, invoicing, appraisals, surveys, recruitment, and other operational functions from a centralized platform.</p>
+								<p>OgaFlow is a cloud-based Enterprise Workplace Management Platform that enables organizations to manage employee records, departments, payroll, attendance, projects, customer management, invoicing, appraisals, surveys, recruitment, and other operational functions from a centralized platform.</p>
 							</div>
 
 							<div>
