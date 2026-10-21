@@ -139,12 +139,8 @@ export default function MarketingPage() {
 					<h3 className="mb-5 text-[24px] font-bold leading-[32px] tracking-[0.02em] text-black font-nunito">
 						TRUSTED BY
 					</h3>
-					<div className="flex flex-wrap justify-center gap-8 sm:gap-20 opacity-30 grayscale transition-all hover:opacity-100 hover:grayscale-0">
-						{[1, 2, 3, 4, 5].map((i) => (
-							<span key={i} className="text-3xl font-black tracking-tighter text-black select-none">
-								BLOOM
-							</span>
-						))}
+					<div className="flex justify-center">
+						<img src="/images/bloom-logo.png" alt="Bloom" className="h-12 sm:h-14 w-auto select-none" />
 					</div>
 				</div>
 			</section>
